@@ -2,7 +2,7 @@
 ### Collin M. McCabe, Ph. D. - collinmichaelmccabe@gmail.com
 
 ## Schedule
-* Wednesday, May 9th – [Back to base-ics: Installing and getting familiar with base R](https://www.github.com/collinmmccabe/bootcampR/day1)
+* Wednesday, May 9th – [Back to base-ics: Installing and getting familiar with base R](/day1)
   * Math
   * Variables
   * Functions
