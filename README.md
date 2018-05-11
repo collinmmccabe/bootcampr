@@ -6,12 +6,12 @@
   * Math
   * Variables
   * Functions
-* Thursday, May 10th – Structuring your thoughts: Introduction to data structures in base R
+* Thursday, May 10th – [Structuring your thoughts: Introduction to data structures in base R](/day2)
   * Vectors
   * Matrices
   * Data frames
   * Lists
-* Friday, May 11th – “if” only “for” a “while”: Control flow in base R
+* Friday, May 11th – [“if” only “for” a “while”: Control flow in base R](/day3)
   * Conditionals
   * If-else statements
   * Loops
