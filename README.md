@@ -15,7 +15,7 @@
   * Conditionals
   * If-else statements
   * Loops
-* Monday, May 14th – Putting the data in “Data Science”: Importing from files, databases, web
+* Monday, May 14th – [Putting the data in “Data Science”: Importing from files, databases, web](/day4)
   * “Flat” files
   * Relational databases
   * Web APIs
