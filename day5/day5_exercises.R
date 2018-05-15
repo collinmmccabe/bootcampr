@@ -12,6 +12,7 @@
 # this, we will first discuss storing data in tibbles vs. data frames, as well
 # as a new class of data which can be very useful for data analysis, the factor
 library("tibble")
+library(tidyverse)
 
 # Before we get really into the package functionality today, 
 
@@ -31,7 +32,7 @@ C <- c("M", "F", "M", "M", "O", "F", "F", "M", "M", "O")
 tibble(number = A, bool = B, sex = C)
 
 # Tibbles will not be created if any column is shorter than another
-D <- c("x", "y", "z")
+D <- c("x", "y", "z", "a", "b")
 tibble(number = A, bool = B, sex = C, letters = D)
 
 # Factors are really just strings with a defined set of possible values
@@ -61,9 +62,15 @@ url("https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html")
 url("http://r4ds.had.co.nz/tidy-data.html")
 
 
+table4a
+gather(table4a, '1999', '2000', key = "year", value = "cases")
+gather(table4a, 2:3, key = "year", value = "cases" )
 
+table2
+spread(table2, key = type, value = count)
 
-
+table3
+separate(table3, 'rate', into = ("cases", "population"))
 
 ### LEARNING FROM TEH INTERWEBZ TODAY ###
 
@@ -74,6 +81,7 @@ url("http://r4ds.had.co.nz/tidy-data.html")
 
 # Now, let's practice tidying with the who dataset, a very non-tidy set included
 #  with tidyr. To check it out in an interactive editor, use the function View()
+who
 View(who)
 
 # And since this dataset is already included with the package, we can find out 
@@ -81,3 +89,9 @@ View(who)
 ?who
 
 # Now- make who tidy!
+who1 <- gather(who, key = "code", value = "value", 5:60)
+View(who1)
+who2 <- separate(who1, code, c("new", "var", "sexage"))
+View(who2)
+who3 <- separate(who2, sexage, c("sex", "age"), sep = 1)
+View(who3)
