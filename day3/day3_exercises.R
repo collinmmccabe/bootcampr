@@ -18,21 +18,29 @@
 # objects can either be assigned at initialization, as we've done so far, or
 # they can be calculated by doing some sort of comparison, which is arguably
 # much more useful. The comparison operators come in a variety of flavors:
-     # Less than
-     # Greater than
-     # Less than or equal to
-     # Greater than or equal to
-     # Equal to (remember that a single "=" is an assignment operator)
-     # Not equal to
+1 < 2      # Less than
+2 > 1      # Greater than
+1 <= 2     # Less than or equal to
+2 >= 1     # Greater than or equal to
+1 == 2     # Equal to (remember that a single "=" is an assignment operator)
+1 != 2     # Not equal to
 
 # Typically, you'll only want to compare data of similar classes (unless you
 # really know what you're doing). The comparison operators will (sometimes)
 # work to compare disparate classes
+1L == TRUE
+0L == FALSE
 
+1.0 == TRUE
+0.0 == FALSE
+
+1L == 1.0
+"1" == 1
 
 # However, the general idea of "truthy-ness" as implemented in Python doesn't
 # really carry over into R (empty strings are not FALSE, strings with something
 # in them are not TRUE)
+"test" == TRUE
 
 
 # These comparisons can be combined into more complex conditions using the
@@ -40,7 +48,7 @@
 
 # "not" only evaluates to true if the condition being operated on is false;
 # "not" is represented in R using the "!" (in computer speak, this is a "bang")
-
+!(1>2)
 
 # "and" only evaluates to true if both of two joined conditions are true; "and"
 # is represented in R using the "&", but can vary in it's application as either
@@ -51,21 +59,20 @@
 vec1 <- c(1, 2, 3, 4, 5, 6)
 vec2 <- c(3, 4, 4, 5, 6, 8)
 
-    # for which elements are both values even?
+(vec1 %% 2 == 0) & (vec2 %% 2 == 0)    # for which elements are both values even?
 
-    # comparison of single value booleans with double "&&"
+(2 < 3) && (3 >=3 )    # comparison of single value booleans with double "&&"
 
-# Both the single and double "and" can be concatenated indefinitely
-
+(1 < 2) && (2 < 3) && (3 < 4) && (4 < 5) # Both the single and double "and" can be concatenated indefinitely
 
 # "or" evaluates to true if either or both of two joined conditions are true;
 # "or" is represented in R using the "|" and "||". Just like with "and", the 
 # difference is that the single "|" compares two items element-wise, while the 
 # double "||" only evaluates the first statement of each condition
 
-  # for which elements are either value even?
+(vec1 %% 2 == 0) | (vec2 %% 2 == 0)   # for which elements are either value even?
 
-  # comparison of single value booleans with double "||"
+(2 < 3) || (3 < 3)  # comparison of single value booleans with double "||"
 
 # The real power of the double logical operator is that it will immediately stop
 # calculating a condition once it has enough information to determine one way or
@@ -74,27 +81,31 @@ FALSE || TRUE || TRUE || TRUE || TRUE || TRUE || TRUE || TRUE || TRUE || TRUE
 # ...will evaluate to FALSE faster than this will:
 TRUE || TRUE || TRUE || TRUE || TRUE || TRUE || TRUE || TRUE || TRUE || FALSE
 
+FALSE || FALSE || FALSE || FALSE || FALSE || FALSE || FALSE || FALSE || FALSE || TRUE
+
 # Finally, "xor",  or "exclusive or" evaluates to true only if one or the other 
 # of two joined conditions are true, but not if both are; it is calculated with
 # the function xor()
-
+xor(FALSE, TRUE)
+xor(TRUE, TRUE)
 
 # Logicals can come in really handy for slicing and subsetting arrays on a
 # certain condition
-
+vec1[vec1 %% 2 == 0]
 
 # The same can be done with matrices, dataframes, lists, etc. But one neat thing
 # that you can do for subsetting dataframes is to subset one column based on the
 # conditions of another column
-
+mtcars
+mtcars$mpg[mtcars$cyl == 8]
 
 # And you can even subset an entire dataframe from a conditional on its columns
-
+mtcars[mtcars$am > 0, ]
 
 # Using sum() in conjunction with conditionals is also a good way to implement a
 # conditional counting function in R, since TRUE == 1, summing the vector of
 # logicals is the same as counting all the TRUEs
-
+sum(vec1 %% 2 != 0)
 
 #---------------#
 # If Statements #
@@ -107,9 +118,12 @@ TRUE || TRUE || TRUE || TRUE || TRUE || TRUE || TRUE || TRUE || TRUE || FALSE
 # with the following syntax:
 #   Note: the "if", the parentheses, and the curly braces are necessary for an
 #   if statement in R; the space after if is not, but it is best practice...
-x <- 2
+x <- 3
 if (x %% 2 == 0) {
   print("x is even")
+}
+if (x %% 2 != 0) {
+  print("x is odd")
 }
 
 # You can also evaluate an if statement on a more complicated conditional
@@ -134,8 +148,9 @@ class(as.integer(readline("Let's try that again: ")))
 if_statement <- function() {
   x <- as.integer(readline("Type a number: "))
   
-  
-  
+  if (x > 10) {
+    print("Your number is greater than 10")
+  }
 }
 
 if_statement()
@@ -147,8 +162,11 @@ if_statement()
 
 ifelse_statement <- function() {
   x <- as.integer(readline("Type a number: "))
-  
-  
+  if (x > 10) {
+    print("Your number is greater than 10")
+  } else {
+    print("Your number is less than 10")
+  }  
   
 }
 
@@ -162,9 +180,13 @@ ifelse_statement()
 
 ifelseifelse_statement <- function() {
   x <- as.integer(readline("Type a number: "))
-  
-  
-  
+  if (x > 10) {
+    print("Your number is greater than 10")
+  } else if (x >= 5) {
+    print("Your number is between 5 and 10")
+  } else {
+    print("Your number is less than 5")
+  }
 }
 
 ifelseifelse_statement()
@@ -204,7 +226,9 @@ ifelseifelse_long_statement()
 
 # A useful shorthand for if else statements is the one-line function ifelse()
 # - Look up the help page to learn about how to structure the statement
-
+?ifelse
+y <- 5
+ifelse(y >= 6, "at least 6", "less than 6")
 
 #-------#
 # Loops #

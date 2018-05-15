@@ -117,7 +117,7 @@ sum(vec1 %% 2 != 0)
 # with the following syntax:
 #   Note: the "if", the parentheses, and the curly braces are necessary for an
 #   if statement in R; the space after if is not, but it is best practice...
-x <- 2
+x <- 9
 if (x %% 2 == 0) {
   print("x is even")
 }
@@ -261,10 +261,8 @@ while (i < 10) {
 
 # Or, your condition will never evaluate to FALSE (also an infinite loop)
 i <- 1
-while (i < 10) {
-  print("i is less than 10")
-  i <- i - 1
-}
+
+
 
 # You can nest if/else statements within loops to further control their behavior
 #   Best Practice: empty lines between statements can help with reading long fxn
