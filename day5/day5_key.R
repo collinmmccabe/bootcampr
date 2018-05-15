@@ -30,6 +30,7 @@ B <- c(TRUE, TRUE, FALSE, TRUE, FALSE, TRUE, TRUE, FALSE, TRUE, FALSE)
 C <- c("M", "F", "M", "M", "O", "F", "F", "M", "M", "O")
 tibble(number = A, bool = B, sex = C)
 
+
 # Tibbles will not be created if any column is shorter than another
 D <- c("x", "y", "z")
 tibble(number = A, bool = B, sex = C, letters = D)
@@ -60,15 +61,26 @@ url("https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html")
 # But instead, let's actually use Hadley Wickham's online book to learn tidyr :)
 url("http://r4ds.had.co.nz/tidy-data.html")
 
+table1
 
+table4a
 
-
-
+gather(table4a, 2:3, key = "year", value = "cases")
 
 ### LEARNING FROM TEH INTERWEBZ TODAY ###
 
+view(table2)
 
 
+spread(table2, key = type, value = count)
+
+table2
+
+table3
+separate(table3,rate, into = c("cases", "population"))
+
+table5
+unite(table5, new, century, year, sep= "")
 
 
 
@@ -86,3 +98,4 @@ who1 <- gather(who, "code", "value", 5:60)
 who1 <- separate(who1, code, c("new", "var", "sexage"))
 who1 <- View(separate(who1, sexage, c("sex", "age"), sep = 1))
 who1 <- spread(who1, var, value)
+
