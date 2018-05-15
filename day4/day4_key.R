@@ -65,23 +65,24 @@ easypack("readr")
 # into one long string. Sometimes this is a great idea- for instance, maybe you
 # want to import a long text file for natural language processing or genomics.  
 # In base R, you do this with readChar()
-readChar("data/prideandprejudice.txt") # readChar() requires you to state length
-readChar("data/prideandprejudice.txt", nchars = 1e4) # ...so you have to guess
-readChar("data/prideandprejudice.txt", nchars = 1e5) # ...over and over
-readChar("data/prideandprejudice.txt", nchars = 1e6) # ...until you guess right
+readChar("day4/data/prideandprejudice.txt") # readChar() requires you to state length
+readChar("day4/data/prideandprejudice.txt", nchars = 1e4) # ...so you have to guess
+readChar("day4/data/prideandprejudice.txt", nchars = 1e5) # ...over and over
+readChar("day4/data/prideandprejudice.txt", nchars = 1e6) # ...until you guess right
 
 # Another way to get the length of the text file programmatically is to 
 # calculate the filesize from file.info()
-fileName <- "data/prideandprejudice.txt"
+fileName <- "day4/data/prideandprejudice.txt"
+
 readChar(fileName, file.info(fileName)$size)
 
 # But you'll be happy to know that in the tidyverse, this is all done quite 
 # easily with the function read_file()
-read_file("data/prideandprejudice.txt")
+read_file("day4/data/prideandprejudice.txt")
 
 # But what if we want to read in the text file one line at a time? For this, 
 # using base R, we can use readLines
-readLines("data/prideandprejudice.txt")
+readLines("day4/data/prideandprejudice.txt")
 
 # That went a lot smoother than readChar() did, but one glaring issue is the
 # fact that readLines() has trouble making sense of some more exotic characters
@@ -90,7 +91,7 @@ readLines("data/prideandprejudice.txt")
 #   Sidenote: remember that just running the read function will not import any
 #   data permanently into R as an object. To do this, you must assign the return
 #   of your read function to an object.
-(pride <- read_lines("data/prideandprejudice.txt"))
+(pride <- read_lines("day4/data/prideandprejudice.txt"))
 
 # We can also use some simple conditional subsetting to remove all the empty 
 # lines in the file that was read in.
@@ -102,7 +103,7 @@ pride[pride != ""]
 # types of delimitted files in the data world are tab-delimitted and comma-
 # delimitted files. Let's start with tab-delimitted (data fields separated by a
 # \t or tab) files. Using base R, you import these files with read.table()
-read.table("data/usbls_edhcemployment_short.txt")
+read.table("day4/data/usbls_edhcemployment_short.txt")
 
 # For these larger files,you might not want to see all the data every time you 
 # call the data object. For this, we can use the same head() function that we 
@@ -111,18 +112,18 @@ head(read.table("data/usbls_edhcemployment_short.txt"))
 
 # It looks like our column names didn't get read in correctly. We can fix 
 # that with the argument header = TRUE
-head(read.table("data/usbls_edhcemployment_short.txt", header = TRUE))
+head(read.table("day4/data/usbls_edhcemployment_short.txt", header = TRUE))
 
 # read.table() works well if you're working with well formatted datasets, but 
 # often, either due to formatting issues from upgrading legacy file systems,
 # computer error, or just plain laziness, you don't get a clean dataset. Watch 
 # what happens when we try to get read.table() to import a file where some rows 
 # don't contain the expected number of entries...
-head(read.table("data/usbls_edhcemployment.txt", header = TRUE))
+head(read.table("day4/data/usbls_edhcemployment.txt", header = TRUE))
 
 # Of course, the tidyverse handles tab-delimitted files with ease, using 
 # read_tsv() for tab separated values
-read_tsv("data/usbls_edhcemployment.txt")
+read_tsv("day4/data/usbls_edhcemployment.txt")
 
 # Note that we did get a warning because of our number of rows not matching up
 # with our number of entries in each row, but instead of throwing an error,
@@ -133,29 +134,29 @@ read_tsv("data/usbls_edhcemployment.txt")
 
 # We can also read in comma-separated value files, or csv's, using the base R
 # function read.csv()
-head(read.csv("data/car.csv"))
+head(read.csv("day4/data/car.csv"))
 
 # Well shoot, the last base R function, read.table() didn't import our headers
 # by default when they were there, but now we're having the opposite issue with
 # read.csv(). By default, read.csv() expects column names, and so we need to
 # explicitly state that we don't have any column names in this file, and that
 # our first line contains data
-head(read.csv("data/car.csv", header = FALSE))
+head(read.csv("day4/data/car.csv", header = FALSE))
 
 # Unfortunately, the tidyverse version of this function has this issue, too. So
 # it's typically a good idea to always explicitly tell your import function 
 # whether or not there are header titles in the file. With the tidyverse import
 # functions (all of them), this is done with the argument col_names instead of
 # header.
-read_csv("data/car.csv")
-read_csv("data/car.csv", col_names = FALSE)
+read_csv("day4/data/car.csv")
+read_csv("day4/data/car.csv", col_names = FALSE)
 
 # But one nice thing about this col_names argument is that it can also take a
 # vector of names, which will rename the columns in the dataset. There is a text
 # file in the data folder that contains the names of the columns:
-read_lines("data/car-names.txt")
+read_lines("day4/data/car-names.txt")
 
-read_csv("data/car.csv", col_names = c("buying", "maint", "doors", "persons", 
+read_csv("day4/data/car.csv", col_names = c("buying", "maint", "doors", "persons", 
                                        "lug_boot", "safety"))
 
 # If you try to do this with the base R function, it doesn't work, which is 
@@ -169,7 +170,7 @@ head(read.csv("data/car.csv", header = c("buying", "maint", "doors", "persons",
 # argument sep, and in the tidyverse, you use delim.
 read.delim("data/days.txt", sep = " ")
 
-(days <- read_delim("data/days.txt", delim = " "))
+(days <- read_delim("day4/data/days.txt", delim = " "))
 
 # By now, you may have noticed that the functions from the tidyverse are using
 # slightly different displays for the data than a typical dataframe. This is 
@@ -208,11 +209,11 @@ easypack("gdata")
 
 # The function for reading in Excel data is of the same formula as for base R 
 # read functions (read.*()). For Excel files, this equates to read.xls()
-read.xls("data/fbicrime.xls")
+read.xls("day4/data/fbicrime.xls")
 
 # However, since development of this package has died down recently, the more 
 # up-to-date .xlsx format is not supported by gdata
-read.xls("data/crimebyyear_multisheet.xlsx")
+read.xls("day4/data/crimebyyear_multisheet.xlsx")
 
 # Another noteworthy package that you can use to import Excel files is the more
 # recent xlsx. This package uses Java instead of Perl, and R should be able to
@@ -221,7 +222,7 @@ read.xls("data/crimebyyear_multisheet.xlsx")
 easypack("xlsx")
 
 # Here, the read function is just as you'd expect: read.xlsx()
-read.xlsx("data/crimebyyear_multisheet.xlsx") # need to provide a sheet number
+read.xlsx("day4/data/crimebyyear_multisheet.xlsx") # need to provide a sheet number
 read.xlsx("data/crimebyyear_multisheet.xlsx", 1)
 
 # Which brings us to the much easier and more user friendly tidyverse package,
@@ -231,17 +232,17 @@ read.xlsx("data/crimebyyear_multisheet.xlsx", 1)
 easypack("readxl")
 
 # The core function used for importing both .xls and .xlsx files is read_excel()
-read_excel("data/fbicrime.xls")
+read_excel("day4/data/fbicrime.xls")
 
 # It looks like there was some data in the first few lines of the Excel file
 # before we could get to the real data table. We can have readxl ignore these
 # lines with the skip argument.
-read_excel("data/fbicrime.xls", skip = 3)
+read_excel("day4/data/fbicrime.xls", skip = 3)
 
 # If working with a multi-sheet Excel document, you can also choose the sheet
 # number to import with the sheet argument.
-read_excel("data/crimebyyear_multisheet.xlsx", skip = 3)
-read_excel("data/crimebyyear_multisheet.xlsx", sheet = 2, skip = 3)
+read_excel("day4/data/crimebyyear_multisheet.xlsx", skip = 3)
+read_excel("day4/data/crimebyyear_multisheet.xlsx", sheet = 2, skip = 3)
 
 # Of course, Excel isn't the only proprietary data file system out there- there
 # are a ton! As a data scientist, one of the more common issues that you're 
@@ -435,11 +436,12 @@ hercules <- read_html("https://www.imdb.com/title/tt1267297/")
 # object with html_text().
 nodes <- html_nodes(hercules, "#titleCast .itemprop span")
 cast <- html_text(nodes)
+cast
 
 # We'll do the same with roles, too.
 nodes2 <-  html_nodes(hercules, "#titleCast .character a")
 role <- html_text(nodes2)
-
+role
 # Then we can print this all out to make things look nice
 cbind(actor = cast[c(1:8, 10:12)], role = role)
 
