@@ -68,7 +68,7 @@ url("http://r4ds.had.co.nz/tidy-data.html")
 ### LEARNING FROM TEH INTERWEBZ TODAY ###
 
 
-
+table4a
 
 
 

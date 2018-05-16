@@ -60,6 +60,8 @@ vec2 <- c(3, 4, 4, 5, 6, 8)
 
 (vec1 %% 2 == 0) & (vec2 %% 2 == 0)  # for which elements are both values even?
 
+bvec = (vec1 %% 2 == 0) & (vec2 %% 2 == 0)
+
 (2 < 3) && (3 >= 3)  # comparison of single value booleans with double "&&"
 
 # Both the single and double "and" can be concatenated indefinitely
@@ -77,7 +79,7 @@ vec2 <- c(3, 4, 4, 5, 6, 8)
 # The real power of the double logical operator is that it will immediately stop
 # calculating a condition once it has enough information to determine one way or
 # another, which means that this:
-FALSE || TRUE || TRUE || TRUE || TRUE || TRUE || TRUE || TRUE || TRUE || TRUE
+TRUE && FALSE && FALSE && FALSE && FALSE && FALSE && FALSE && FALSE && FALSE && FALSE
 # ...will evaluate to FALSE faster than this will:
 TRUE || TRUE || TRUE || TRUE || TRUE || TRUE || TRUE || TRUE || TRUE || FALSE
 
@@ -86,6 +88,7 @@ TRUE || TRUE || TRUE || TRUE || TRUE || TRUE || TRUE || TRUE || TRUE || FALSE
 # the function xor()
 xor(TRUE, FALSE)
 xor(TRUE, TRUE)
+xor(2<3,3<2)
 
 # Logicals can come in really handy for slicing and subsetting arrays on a
 # certain condition
@@ -105,7 +108,7 @@ mtcars[mtcars$am > 0, ]
 # conditional counting function in R, since TRUE == 1, summing the vector of
 # logicals is the same as counting all the TRUEs
 sum(vec1 %% 2 != 0)
-
+sum(vec2 %% 2 != 0)
 #---------------#
 # If Statements #
 #---------------#
@@ -146,6 +149,9 @@ if_statement <- function() {
   
   if (x > 10) {
     print("Your number is greater than ten")
+  }
+  else {
+    print("Your number is not greater than ten")
   }
 }
 
@@ -288,6 +294,7 @@ while (i < 10) {
   
   if (i %% 2 == 1) {
     print("i is odd; specifically, it is:")
+    print(i)
     i <- i + 1
   } else if (i == 8) {
     print("i is equal to 8, so I'm quitting")
@@ -296,8 +303,6 @@ while (i < 10) {
     i <- i + 1
     next
   }
-  
-  print(i)
 }
 
 # You can also build the condition in the first line of the while statement into
