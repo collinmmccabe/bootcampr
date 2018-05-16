@@ -29,11 +29,11 @@ A <- c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
 B <- c(TRUE, TRUE, FALSE, TRUE, FALSE, TRUE, TRUE, FALSE, TRUE, FALSE)
 C <- c("M", "F", "M", "M", "O", "F", "F", "M", "M", "O")
 tibble(number = A, bool = B, sex = C)
-
+data.frame(number = A, bool = B, sex =C)
 # Tibbles will not be created if any column is shorter than another
-D <- c("x", "y", "z")
+D <- c("x", "y")
 tibble(number = A, bool = B, sex = C, letters = D)
-
+data.frame(number = A, bool = B, sex = C, letters = D)
 # Factors are really just strings with a defined set of possible values
 sexfac <- factor(C)
 sexfac <- factor(C, levels = c("F", "M", "O", "Prefer not to say"))
@@ -60,17 +60,20 @@ url("https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html")
 # But instead, let's actually use Hadley Wickham's online book to learn tidyr :)
 url("http://r4ds.had.co.nz/tidy-data.html")
 
+test1 <- as_tibble(cbind(table4a,test=c(1,2,3)))
+gather (table4a,2:3,key="year",value="cases")
+gather (test1,2:3,key="year",value="cases")
 
 
-
-
-
+View(table2)
+spread(table2, key = type, value = count)
+table3
+install.packages('stringi.so')
+separate(table3, rate, into =c("cases", "population"), sep ="/")
+separate(table3, rate, into = c("cases", "population"))
+table5
+unite(table5,year, century, year, sep = "")
 ### LEARNING FROM TEH INTERWEBZ TODAY ###
-
-
-
-
-
 
 # Now, let's practice tidying with the who dataset, a very non-tidy set included
 #  with tidyr. To check it out in an interactive editor, use the function View()
@@ -82,7 +85,8 @@ View(who)
 
 # Now- make who tidy!
 
-who1 <- gather(who, "code", "value", 5:60)
+who1 <- gather(who, key="code", value="value", 5:60)
+View(who1)
 who1 <- separate(who1, code, c("new", "var", "sexage"))
 who1 <- View(separate(who1, sexage, c("sex", "age"), sep = 1))
 who1 <- spread(who1, var, value)

@@ -28,6 +28,7 @@
 # Typically, you'll only want to compare data of similar classes (unless you
 # really know what you're doing). The comparison operators will (sometimes)
 # work to compare disparate classes
+class(1L)
 1L == TRUE
 0L == FALSE
 
@@ -35,6 +36,7 @@
 2.0 == FALSE
 
 1L == 1.0
+
 "1" == 1
 
 # However, the general idea of "truthy-ness" as implemented in Python doesn't
@@ -60,10 +62,10 @@ vec2 <- c(3, 4, 4, 5, 6, 8)
 
 (vec1 %% 2 == 0) & (vec2 %% 2 == 0)  # for which elements are both values even?
 
-(2 < 3) && (3 >= 3)  # comparison of single value booleans with double "&&"
+(2 >3) && (3 <3)  # comparison of single value booleans with double "&&"
 
 # Both the single and double "and" can be concatenated indefinitely
-(1 < 2) && (2 < 3) && (3 < 4) && (4 < 5)
+(1 < 2) && (2 < 3) && (3 < 4) && (4 >5)
 
 # "or" evaluates to true if either or both of two joined conditions are true;
 # "or" is represented in R using the "|" and "||". Just like with "and", the 
@@ -90,12 +92,12 @@ xor(TRUE, TRUE)
 # Logicals can come in really handy for slicing and subsetting arrays on a
 # certain condition
 vec1[vec1 %% 2 == 0]
-
+vec1[as.integer(TRUE)]
 # The same can be done with matrices, dataframes, lists, etc. But one neat thing
 # that you can do for subsetting dataframes is to subset one column based on the
 # conditions of another column
 mtcars
-mtcars$mpg[mtcars$cyl == 8]
+mtcars$cyl[mtcars$cyl == 8]
 
 # And you can even subset an entire dataframe from a conditional on its columns
 
@@ -105,7 +107,9 @@ mtcars[mtcars$am > 0, ]
 # conditional counting function in R, since TRUE == 1, summing the vector of
 # logicals is the same as counting all the TRUEs
 sum(vec1 %% 2 != 0)
-
+which (vec1>3)
+vec1 <- c(6,5,4,3,2,1)
+which(vec1 >4)
 #---------------#
 # If Statements #
 #---------------#
@@ -126,7 +130,7 @@ if (x %% 2 == 0) {
 #   Note: you should use double conditional operators for if statements, as they
 #   will evaluate more efficiently
 #     Best practice: wrap your individual conditions in parentheses
-y <- 6
+y <- 4
 if ((y %% 2 == 0) && (y %% 3 == 0)) {
   print("Your number is even and divisible by three")
 }
@@ -136,7 +140,7 @@ if ((y %% 2 == 0) && (y %% 3 == 0)) {
 # use the function readline(); however, this returns a string:
 (x <- readline("Type a number: "))
 
-# So we'll have to coerce the type to an integer
+34# So we'll have to coerce the type to an integer
 class(as.integer(readline("Let's try that again: ")))
 
 # Great! I'll give you the skeleton for the function so that you won't have to 
@@ -224,6 +228,7 @@ ifelseifelse_long_statement()
 # A useful shorthand for if else statements is the one-line function ifelse()
 # - Look up the help page to learn about how to structure the statement
 ?ifelse
+y<-7
 ifelse(y >= 6, "at least 6", "less than 6")
 
 #-------#
@@ -288,7 +293,7 @@ while (i < 10) {
   
   if (i %% 2 == 1) {
     print("i is odd; specifically, it is:")
-    i <- i + 1
+   i <- i + 1
   } else if (i == 8) {
     print("i is equal to 8, so I'm quitting")
     break
@@ -335,6 +340,7 @@ class(1:50)
 # seq() will generate a sequence of numerics (even if they look like integers)
 # from the from argument to the to argument, incremented by the by argument
 seq(from = 0, to = 50, by = 5)
+
 class(seq(from = 0, to = 50, by = 5))
 
 # Finally, the rep() argument will repeat a given value times argument times
@@ -342,7 +348,7 @@ rep(TRUE, times = 20)
 
 # You can use any of these functions in combination with the c() function to 
 # make more complicated vectors
-(iterable <- c(0:9, rep(10, times = 10), seq(from = 20, to = 100, by = 10)))
+class((iterable <- c(0:9, rep(10, times = 10), seq(from = 20, to = 100, by = 10))))
 
 # And your iterator, in the case of the below loop, i, can be anything. You 
 # don't need to worry about it conflicting with other items in your environment,
@@ -425,8 +431,9 @@ every_other(1:20)
 every_other(1:20, by = 3)
 
 # anonymous functions
-(function(x) paste(x, "is the meaning of life"))("R")
+(function(x) paste(x, "is the meaning of life"))("123")
 
 # A useful shorthand for the for loop structure is the function sapply()
 sapply(10:1, function(x) paste(x, "bottles of beer on the wall,", x, "bottles of beer. Take one down, pass it around,", x-1, "bottles of beer on the wall"))
 ?sapply
+
