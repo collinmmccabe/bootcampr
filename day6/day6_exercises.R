@@ -41,11 +41,6 @@ filter(flights, month %in% c(11, 12))
 ### TRY 5.2.4 EXERCISE 1.4 ###
 
 
-
-filter(flights, month >= 7, month <= 9)
-
-filter(flights, between(month, 7, 9))
-
 # Answers to R4DS exercises were taken from Jeffrey Arnold's solutions website 
 # (https://jrnold.github.io/r4ds-exercise-solutions/data-transformation.html)
 # and sometimes were adapted or supplemented by me
@@ -73,11 +68,6 @@ arrange(flights, desc(arr_delay))
 
 ### TRY 5.3.1 EXERCISE 2 ###
 
-
-
-arrange(flights, desc(dep_delay))
-
-arrange(flights, dep_time)
 
 #--------#
 # Select #
@@ -113,29 +103,6 @@ select(flights, time_hour, air_time, everything())
 ### TRY 5.4.1 EXERCISE 1 ###
 
 
-
-select(flights, dep_time, dep_delay, arr_time, arr_delay)
-
-select(flights, starts_with("dep"), arr_time, arr_delay)
-
-select(flights, dep_time, dep_delay, starts_with("arr"))
-
-select(flights, starts_with("dep"), starts_with("arr"))
-
-# Not this, too many other _time variables
-select(flights, ends_with("time"), ends_with("delay"))
-
-# Could do this though...
-select(flights, ends_with("time"), ends_with("delay"),
-       -starts_with("sched"), -starts_with("air"))
-
-# Or some combination of this and earlier statements
-select(flights, starts_with("dep"), ends_with("delay"), arr_time)
-
-select(flights, starts_with("arr"), ends_with("delay"), dep_time)
-
-# And the list goes on...
-
 #--------#
 # Mutate #
 #--------#
@@ -169,13 +136,6 @@ transmute(flights,
 ### TRY 5.5.2 EXERCISE 1 ###
 
 
-
-mutate(flights,
-       dep_time_mins = dep_time %/% 100 * 60 + dep_time %% 100,
-       sched_dep_time_mins = 
-         sched_dep_time %/% 100 * 60 + sched_dep_time %% 100) %>%
-  select(dep_time, dep_time_mins, sched_dep_time, sched_dep_time_mins)
-
 #-------#
 # Pipes #
 #-------#
@@ -201,10 +161,3 @@ popular_dests %>%
 
 ### TRY 5.7.1 EXERCISE 4 ###
 
-
-
-flights %>%
-  filter(!is.na(arr_delay), arr_delay > 0) %>%  
-  group_by(dest) %>%
-  mutate(total_delay = sum(arr_delay),
-         prop_delay = arr_delay / sum(arr_delay))
