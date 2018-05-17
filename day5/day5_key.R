@@ -8,6 +8,11 @@
 #                                                                              #
 ################################################################################
 
+# All examples in this session are taken directly from Garrett Grolemund and 
+# Hadley Wickham's online book, R for Data Science, specifically, the chapter on
+# Tidy Data (http://r4ds.had.co.nz/tidy-data.html). We will be referring to this
+# material throughout lecture today.
+
 # Today, we'll talk about cleaning our data once we have read it into R. For 
 # this, we will first discuss storing data in tibbles vs. data frames, as well
 # as a new class of data which can be very useful for data analysis, the factor

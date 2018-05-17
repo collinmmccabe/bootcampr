@@ -19,17 +19,17 @@
   * “Flat” files
   * Relational databases
   * Web APIs
-* Tuesday, May 15th – Tidying up a bit: Introduction to “tidy” data and cleaning data with tidyr
+* Tuesday, May 15th – [Tidying up a bit: Introduction to “tidy” data and cleaning data with tidyr](/day5)
   * Tidy data and tibbles
   * Gathering/spreading
   * Data maintenance: type errors, NAs, etc
   * Factors as a special data class
-* Wednesday, May 16th – Being manipulative: Using dplyr to manipulate data in R
+* Wednesday, May 16th – [Being manipulative: Using dplyr to manipulate data in R](/day6)
   * Subsetting with select and filter
   * Reordering with arrange
   * Deriving variables with mutate
   * Linking with pipes
-* Thursday, May 17th – Getting visual: Data visualization and exploratory analysis in R
+* Thursday, May 17th – [Getting visual: Data visualization and exploratory analysis in R](/day7)
   * Summary statistics and summarise
   * Visualizing distributions
   * Visualizing comparisons
