@@ -40,6 +40,13 @@ filter(flights, month %in% c(11, 12))
 
 ### TRY 5.2.4 EXERCISE 1.4 ###
 
+filter(flights, month %in% c(7,8,9))
+
+filter(flights, month %in% 7:9)
+
+filter(flights, month >= 7, month <= 9)
+
+filter(flights, between(month, 7, 9))
 
 # Answers to R4DS exercises were taken from Jeffrey Arnold's solutions website 
 # (https://jrnold.github.io/r4ds-exercise-solutions/data-transformation.html)
@@ -68,6 +75,8 @@ arrange(flights, desc(arr_delay))
 
 ### TRY 5.3.1 EXERCISE 2 ###
 
+arrange(flights, desc(dep_delay))
+arrange(flights, dep_time)
 
 #--------#
 # Select #
@@ -87,7 +96,7 @@ select(flights, starts_with("arr_"))
 select(flights, ends_with("delay"))
 select(flights, contains("time"))
 
-# If you want to rename a coulmn in base R, you have to list every other column
+# If you want to rename a column in base R, you have to list every other column
 cbind(flights[1:11], tail_num = flights$tailnum, flights[13:19])
 
 # But in dplyr, rename automates the boring work
