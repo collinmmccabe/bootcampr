@@ -29,7 +29,7 @@
   * Reordering with arrange
   * Deriving variables with mutate
   * Linking with pipes
-* Thursday, May 17th – Getting visual: Data visualization and exploratory analysis in R
+* Thursday, May 17th – [Getting visual: Data visualization and exploratory analysis in R](/day7)
   * Summary statistics and summarise
   * Visualizing distributions
   * Visualizing comparisons
