@@ -202,7 +202,7 @@ popular_dests %>%
 ### TRY 5.7.1 EXERCISE 4 ###
 
 
-
+filter(flights,!is.na(arr_delay), arr_delay > 0)
 flights %>%
   filter(!is.na(arr_delay), arr_delay > 0) %>%  
   group_by(dest) %>%

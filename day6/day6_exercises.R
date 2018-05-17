@@ -16,6 +16,7 @@
 # First, we will of course load the tidyverse package dplyr, as well as install
 # and load the example data, which comes in a separate package, nycflights13
 library(dplyr)
+install.packages("dplyr")
 install.packages("nycflights13")
 library(nycflights13)
 
@@ -31,7 +32,7 @@ flights[(flights$month == 1 & flights$day == 1), ]
 # Instead, you can do this in the tidyverse with the dataset as the first 
 # argument, and then the rest of the filtering conditions (without df_name$)
 # as the rest of the arguments. Using the comma between arguments implies &
-filter(flights, month == 1, day == 1)
+filter(flights, month == 1, day ==1)
 
 # If you want to use an or relationship, so not separate your conditions and 
 # just include the |
@@ -39,8 +40,9 @@ filter(flights, month == 11 | month == 12)
 filter(flights, month %in% c(11, 12))
 
 ### TRY 5.2.4 EXERCISE 1.4 ###
-
-
+filter(flights, month %in% c(7,8,9))
+filter(flights, month >= 7 & month <= 9)
+filter(flights, between(month,7,9))
 # Answers to R4DS exercises were taken from Jeffrey Arnold's solutions website 
 # (https://jrnold.github.io/r4ds-exercise-solutions/data-transformation.html)
 # and sometimes were adapted or supplemented by me
@@ -64,10 +66,11 @@ arrange(flights, year, month, day)
 
 # You can reverse the order so that items are sorted from largest to smallest by
 # using the desc() function in the argument.
-arrange(flights, desc(arr_delay))
+arrange(flights, desc(arr_time))
 
 ### TRY 5.3.1 EXERCISE 2 ###
-
+v1<-arrange(flights,desc(arr_delay))
+arrange(flights, dep_time)
 
 #--------#
 # Select #
@@ -84,6 +87,7 @@ select(flights, -(year:day))
 # You can also use special search functions to find all variables that match a 
 # given condition
 select(flights, starts_with("arr_"))
+
 select(flights, ends_with("delay"))
 select(flights, contains("time"))
 
@@ -99,9 +103,13 @@ flights[c(19, 15, 1:14, 16:18)]
 
 # But not with dplyr, just use the everything() function
 select(flights, time_hour, air_time, everything())
-
+#if we put everything() first and then time_hour and air_time, it will give you everything
 ### TRY 5.4.1 EXERCISE 1 ###
+flights[c("dep_time", "dep_delay", "arr_time","arr_delay")]
 
+select(flights,dep_time, dep_delay, arr_time, arr_delay)
+
+select(flights, starts_with("dep"),starts_with("arr"))
 
 #--------#
 # Mutate #
@@ -132,9 +140,17 @@ transmute(flights,
           hours = air_time / 60,
           gain_per_hour = gain / hours
 )
+5/3
+5%/%3
+5%%100
 
 ### TRY 5.5.2 EXERCISE 1 ###
-
+transmute(flights,
+          dep_time_minutes=dep_time%/%100*60+dep_time-dep_time%/%100
+          )
+transmute(flights,
+          dep_time_minutes=dep_time%/%100*60+dep_time%%100
+)
 
 #-------#
 # Pipes #
@@ -160,4 +176,10 @@ popular_dests %>%
   select(year:day, dest, arr_delay, prop_delay)
 
 ### TRY 5.7.1 EXERCISE 4 ###
+flights %>%
+group_by(dest) %>%
+  mutate(total_delay=sum(arr_delay))
 
+v2 <- flights %>%
+    group_by(dest)%>%
+    
