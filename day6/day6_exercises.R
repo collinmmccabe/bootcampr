@@ -20,6 +20,7 @@ install.packages("nycflights13")
 library(nycflights13)
 
 View(flights)
+?flights
 
 #--------#
 # Filter #
@@ -27,18 +28,30 @@ View(flights)
 
 # Filtering can be done with base R, but it is pretty verbose...
 flights[(flights$month == 1 & flights$day == 1), ]
+class(flights) #It is a tibble
 
 # Instead, you can do this in the tidyverse with the dataset as the first 
 # argument, and then the rest of the filtering conditions (without df_name$)
 # as the rest of the arguments. Using the comma between arguments implies &
-filter(flights, month == 1, day == 1)
+january_1 <- filter(flights, month == 1, day == 1)
+View(january_1)
 
-# If you want to use an or relationship, so not separate your conditions and 
+
+# If you want to use an or relationship, do not separate your conditions and 
 # just include the |
-filter(flights, month == 11 | month == 12)
+november_december <- filter(flights, month == 11 | month == 12)
+View(november_december)
 filter(flights, month %in% c(11, 12))
 
 ### TRY 5.2.4 EXERCISE 1.4 ###
+#Find the flights that depart during July, August, September
+summer <- filter(flights, month %in% c(7, 8, 9))
+View(summer)
+#can also do...
+filter(flights, month %in% 7:9)
+filter(flights, between(month, 7, 9))
+
+
 
 
 # Answers to R4DS exercises were taken from Jeffrey Arnold's solutions website 
@@ -55,19 +68,30 @@ filter(flights, month %in% c(11, 12))
 sort(flights$arr_delay)
 
 # Arrange sorts by default from smallest to largest
-arrange(flights, arr_delay)
+smallest_to_largest <- arrange(flights, arr_delay)
+View(smallest_to_largest)
 
 # If you list multiple arrange arguments, items will be listed first in 
 # ascending order of the first column listed, then within each set of equal 
 # values for that column, the data will be sorted by the second column, etc.
 arrange(flights, year, month, day)
+sorted_year_month_day <- arrange(flights, year, month, day)
+View(sorted_year_month_day)
 
 # You can reverse the order so that items are sorted from largest to smallest by
 # using the desc() function in the argument.
 arrange(flights, desc(arr_delay))
+View(arrange(flights, desc(arr_delay)))
 
 ### TRY 5.3.1 EXERCISE 2 ###
+#Find the most delayed departure
+#Find the flights that left earliest
 
+arrange(flights, desc(dep_delay))
+arrange(flights, dep_delay)
+
+#Or...maybe it means earliest departure like in the day. Unclear
+arrange(flights, dep_time)
 
 #--------#
 # Select #
@@ -75,10 +99,13 @@ arrange(flights, desc(arr_delay))
 
 # Selecting is similar to the base R concept of subsetting via index or name
 flights[c("year", "month", "day")]
+class(c("year", "month", "day"))
 
 # If you list multiple items, you will select all of them
 select(flights, year, month, day)
 select(flights, year:day)
+
+#Everything *except* year, month, day
 select(flights, -(year:day))
 
 # You can also use special search functions to find all variables that match a 
@@ -87,7 +114,7 @@ select(flights, starts_with("arr_"))
 select(flights, ends_with("delay"))
 select(flights, contains("time"))
 
-# If you want to rename a coulmn in base R, you have to list every other column
+# If you want to rename a column in base R, you have to list every other column
 cbind(flights[1:11], tail_num = flights$tailnum, flights[13:19])
 
 # But in dplyr, rename automates the boring work
@@ -101,7 +128,10 @@ flights[c(19, 15, 1:14, 16:18)]
 select(flights, time_hour, air_time, everything())
 
 ### TRY 5.4.1 EXERCISE 1 ###
+#Find ways to select dep_time, dep_delay, arr_time and arr_delay
 
+select(flights, starts_with("dep"), starts_with("arr"))
+#There are so many
 
 #--------#
 # Mutate #
@@ -111,6 +141,7 @@ select(flights, time_hour, air_time, everything())
 cbind(flights, 
       gain = flights$arr_delay - flights$dep_delay,
       speed = flights$distance / flights$air_time * 60)
+
 
 # But not dplyr, just write names of columns
 mutate(flights, 
@@ -134,7 +165,11 @@ transmute(flights,
 )
 
 ### TRY 5.5.2 EXERCISE 1 ###
+#Convert dep_time and sched_dep_time into minutes after midnight
+with_minutes <- mutate(flights, minutes = 60*(dep_time %/% 100) + (dep_time %% 100))
 
+minutes <- select(with_minutes, minutes)
+View(minutes)
 
 #-------#
 # Pipes #
@@ -142,7 +177,9 @@ transmute(flights,
 
 # Stores an unnecessary intermediate dataset in memory!
 dest_groups <- group_by(flights, dest)
+View(dest_groups)
 no_pipe_popular_dests <- filter(dest_groups, n() > 365)
+View(no_pipe_popular_dests)
 
 # Hard to read!
 one_liner_popular_dests <- filter(group_by(flights, dest), n() > 365)
@@ -160,4 +197,9 @@ popular_dests %>%
   select(year:day, dest, arr_delay, prop_delay)
 
 ### TRY 5.7.1 EXERCISE 4 ###
+View(flights %>% 
+  filter(!is.na(arr_delay), arr_delay > 0) %>%
+  group_by(dest) %>%
+  mutate(total_delay = sum(arr_delay),
+         prop_delay = arr_delay / sum(arr_delay)))
 
