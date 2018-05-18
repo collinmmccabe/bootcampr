@@ -7,7 +7,6 @@
 #                 Collin McCabe | collinmichaelmccabe@gmail.com                #
 #                                                                              #
 ################################################################################
-library(ggplot2)
 
 # We are going to wrap up our tour of dplyr with the summarize and group_by
 # functions. The reason I've saved those for today is that they transition 
@@ -27,7 +26,7 @@ by_cyl <- mtcars %>% group_by(cyl)
 
 # grouping doesn't change how the data looks (apart from listing
 # how it's grouped):
-by_cyl
+glimpse(by_cyl)
 
 # It changes how it acts with the other dplyr verbs:
 by_cyl %>% summarise(
@@ -89,9 +88,35 @@ mtcars %>%
   group_by(cyl) %>%
   summarise(disp = mean(disp), sd = sd(disp))
 
+# Have to switch to...
+mtcars %>%
+  group_by(cyl) %>%
+  summarise(sd = sd(disp), disp = mean(disp))
+
+
 ### 5.6.7 EXERCISE 5 ###
+library(nycflights13)
+View(flights)
 
+#Which carrier has the worst delays?
+flights %>%
+  filter(!is.na(dep_delay)) %>% 
+  group_by(carrier) %>%
+  summarise(dep_delay = mean(dep_delay)) %>%
+  arrange(desc(dep_delay))
 
+flights %>%
+  filter(!is.na(dep_delay), dep_delay > 0) %>% 
+  group_by(carrier) %>%
+  summarise(dep_delay = mean(dep_delay)) %>%
+  arrange(desc(dep_delay))
+
+#Worst by origin...
+flights %>%
+  filter(!is.na(dep_delay), dep_delay > 0) %>% 
+  group_by(origin) %>%
+  summarise(dep_delay = mean(dep_delay)) %>%
+  arrange(desc(dep_delay))
 
 #-----------------------#
 # Plotting with ggplot2 #
@@ -104,9 +129,15 @@ mtcars %>%
 # plotting package) plots at the corresponding website, located at
 # (http://www.cookbook-r.com/Graphs/) - We'll work through some of these 
 # examples in class today
+library(ggplot2)
 
 diamonds %>%
   ggplot(mapping = aes(x = carat)) +
+  geom_histogram(binwidth = 0.01)
+
+#Can also do...
+diamonds %>%
+  ggplot(aes(x = carat)) +
   geom_histogram(binwidth = 0.01)
 
 diamonds %>%
@@ -119,11 +150,7 @@ diamonds %>%
   filter(price < 11000) %>%
   ggplot(aes(x = cut, y = price)) +
   geom_boxplot() +
-  coord_flip()
-
-### EXERCISE 3.7.1 # 3 ###
-
-
+  coord_flip(
 
 CO2 %>%
   filter(conc == 1000) %>%
@@ -141,18 +168,28 @@ CO2 %>%
   ggplot(mapping = aes(x = Treatment, y = mean_CO2, fill = Type)) +
   geom_bar(stat = "identity")
 
+CO2 %>%
+  filter(conc == 1000) %>%
+  group_by(Treatment, Type) %>%
+  summarize(mean_CO2 = mean(uptake), sd = sd(uptake)) %>%
+  ggplot(mapping = aes(x = Treatment, y = mean_CO2, fill = Type)) +
+  geom_bar(stat = "identity", position = position_dodge())
+
+### EXERCISE 3.7.1 #2 ###
+
+
+
+
+
+
 ### 3.3.1 EXERCISE 4 ###
 
 
-
-
 diamonds %>%
-  ggplot(aes(x = carat, y = price)) +
+  ggplot(aes(x = carat, y = price, color = color), size = .01) +
   geom_point()
 
 ### EXERCISE 3.2.4 #4 ###
-
-
 
 datasets::attitude %>% 
   ggplot(aes(x = raises, y = rating)) + 
@@ -165,8 +202,6 @@ datasets::attitude %>%
   geom_smooth(method = "lm")
 
 ### 3.6.1. EXERCISE 3 ###
-
-
 
 ChickWeight %>%
   ggplot(mapping = aes(x = Time, y = weight, color = Diet)) +
@@ -188,8 +223,7 @@ ggplot(data = mpg) +
 ### Exercise 3.5.1 #3 ###
 
 
-
-
+install.packages("maps")
 library(maps)
 ggplot(map_data("state", region = "ohio"), aes(long, lat, group = group)) +
   geom_polygon(fill = "gray", colour = "red") +
