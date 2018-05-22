@@ -1,6 +1,32 @@
-#-------------
-# Regression
-#
+################################################################################
+#                                                                              #
+#                      Erdos Institute Code Bootcamp for R                     #
+#                                 ------------                                 #
+#           Day 10 - Machine Learning: Classification and Regression           #
+#                                 ------------                                 #
+#                 Collin McCabe | collinmichaelmccabe@gmail.com                #
+#                                                                              #
+################################################################################
+
+# Machine learning sounds scary, but really, it's pretty much the same thing
+# that we've been doing for the past couple days. The only difference is that, 
+# rather than using our statistical models to test for associations, we will be
+# using our models to predict future values from inferred associations. Most 
+# machine learning models can also be applied retrospectively to understand
+# associations, but it is the predicting values that makes these models great!
+
+#----------------------------------#
+# Regression (using linear models) #
+#----------------------------------#
+
+# To predict values, we must first get a reliable model. The way to test and
+# (hopefully) confirm the reliability of your model is through the concepts of
+# training and testing. This is just a fancy way of saying: build a model with 
+# a defined subset of your existing data (training), and then see how that model
+# performs on "unseen" data- the remianing data that wasn't part of the training
+# set (testing). We are shooting for a model that performs just about as well on
+# unseen data as it does for its original training set, although this is often 
+# a pretty unrealistic expectation, at least from the get go.
 
 # For our regression example, we will use the mpg dataset included with the
 # tidyverse
@@ -74,23 +100,29 @@ sqrt(mean(error ^ 2))
 mpg_traincontrol <- trainControl(method = "cv", number = 5)
 
 (mpgmod4 <- train(hwy ~ ., mpg, method = "lm", 
-                 trControl = mpg_traincontrol))
+                  trControl = mpg_traincontrol))
 
 # We can then make a prediction on new data using the predict function (we will
 # leave out the hwy measure, and pretend that we dont know it, so we predict it)
 new_data <- data.frame(manufacturer = factor("ford"), displ = 2.50, year = 2005,
-              cyl = 6, trans = factor("auto(av)"), drv = factor("f"), 
-              cty= 20, fl = factor("p"), class = factor("compact"))
+                       cyl = 6, trans = factor("auto(av)"), drv = factor("f"), 
+                       cty= 20, fl = factor("p"), class = factor("compact"))
 
 predict(mpgmod4, new_data)
 
-#------------------
-# Classification
-#
+#--------------------------------------------#
+# Classification (using logistic regression) #
+#--------------------------------------------#
+
+# Logistic regressions are best thought of as a linear model with only, two
+# possible values for y: 0 or 1; Yes or No; TRUE or FALSE; etc. These categories
+# may make the test seem more like a two sample t-test, but in reality, this is
+# much more like a multiple regression model (which can take many x variables),
+# which just happens to have a categorical or factored y variable.
 
 # For our classification example, we will be predicting whether or not something
 # is a hotdog from a variety of traits
-hotdog <- read_csv("GitHub/hotdog.txt", 
+hotdog <- read_csv("data/hotdog.txt", 
                    col_names = c("tastiness", "ketchup", "bun",
                                  "ishotdog", "calories"))
 
@@ -132,9 +164,12 @@ confusionMatrix(hotmod2)
 isdefahotdog <- data.frame(tastiness = 4, ketchup = 1, bun = 1, calories = 250)
 predict(hotmod2, isdefahotdog)
 
-#---------------
-# Clustering
-#
+#------------------------#
+# Clustering (using kNN) #
+#------------------------#
+
+# Clustering is useful when you have a small number of variables, but many 
+# categories into which individuals may fall.
 
 library(class)
 
@@ -152,6 +187,9 @@ iris_traincontrol <- trainControl(method = "cv", number = 5)
 knn <- train(Species ~ ., iris, method = "knn", trControl = iris_traincontrol,
              preProcess = c("center","scale"), tuneLength = 20)
 confusionMatrix(knn)
+
+# You can also artificially reduce the number of variables through 
+# dimensionality reduction approaches, like principal components analysis.
 
 # FIX ME!
 prcomp(iris[1:4, ], iris, scale = TRUE)
