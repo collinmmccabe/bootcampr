@@ -22,6 +22,9 @@ observed_coin2 <- c("heads" = 20, "tails" = 40)
 
 coin2 <- chisq.test(observed_coin2)
 
+coin2$expected
+
+library(tidyverse)
 as_tibble(cbind(outcome = as.integer(c(coin2$observed, coin2$expected)), 
       o_e = c("O", "O", "E", "E"),
       h_t = rep(c("H", "T"), 2))) %>%
@@ -55,15 +58,33 @@ observed_dice <- c("one" = 5, "two" = 5, "three" = 5,
 
 
 
-
+dice_result <- chisq.test(observed_dice)
+dice_result$observed
+dice_result$expected
 
 ### EXERCISE 2 ###
 
 # Do you have an equal number of manual and automatic transmissions in mtcars?
 # How about an equal number of each type of cylinder?
 
-mtcars$am; mtcars$cyl
 
+
+
+res <- mtcars %>%
+  select(am) %>%
+  group_by(am) %>%
+  summarize(n = n()) %>%
+  select(n) %>%
+  chisq.test()
+
+res$expected
+
+mtcars %>%
+  select(cyl) %>%
+  group_by(cyl) %>%
+  summarize(n = n()) %>%
+  select(n) %>%
+  chisq.test()
 
 
 
@@ -86,13 +107,13 @@ rnorm(200) %>%
 
 
 
-
+t.test(morley$Speed, mu = 850)
 
 # Add 299000 back to all of the measurements- does this change your result? Why?
 
 
 
-
+t.test(morley$Speed + 299000, mu = 299850)
 
 ### What about comparing two distributions? Two sample t-test: ###
 
@@ -119,9 +140,11 @@ mpg %>%
 
 # Compare petal length in the iris dataset between Species setosa and virginica
 
-iris$Petal.Length; iris$Species
+hist(iris$Petal.Length[iris$Species == "virginica"])
 
-
+iris %>%
+  filter(Species %in% c("setosa", "virginica")) %>%
+  t.test(Petal.Length ~ Species, .)
 
 
 
@@ -176,11 +199,12 @@ summary(result_anova)
 mpg %>%
   filter(cyl != 5) %>%
   group_by(cyl) %>%
-  summarize(mean_hwy = mean(hwy), sd_hwy = sd(hwy)) %>%
+  summarize(mean_hwy = mean(hwy), sd_hwy = sd(hwy), n = n()) %>%
   ggplot(mapping = aes(x = factor(cyl), y = mean_hwy, fill = factor(cyl))) +
   geom_bar(stat = "identity", color = "black", show.legend = FALSE) +
-  geom_errorbar(aes(ymin = mean_hwy - sd_hwy, ymax = mean_hwy + sd_hwy),
-                width = 0.5) +
+  geom_errorbar(aes(ymin = mean_hwy - (sd_hwy / sqrt(n)), 
+                    ymax = mean_hwy + (sd_hwy / sqrt(n)),
+                width = 0.5)) +
   labs(x = "Cylinders", y = "Mean Highway MPG", title = "hwy ~ cyl ANOVA") +
   theme_minimal()
 
@@ -192,3 +216,9 @@ TukeyHSD(result_anova)
 
 
 
+result_anova2 <- iris %>%
+  aov(Petal.Length ~ factor(Species), .)
+
+summary(result_anova2)
+
+TukeyHSD(result_anova2)

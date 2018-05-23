@@ -33,19 +33,19 @@
   * Summary statistics and summarise
   * Visualizing distributions
   * Visualizing comparisons
-* Friday, May 18th – Spot the differences: Statistical analyses of categorical data in R
+* Friday, May 18th – [Spot the differences: Statistical analyses of categorical data in R](/day8)
   * Pure categorical: Chi-square test
   * Simple comparisons: t-test
   * Multiple comparisons: ANOVA
-* Monday, May 21st – Spot the trends: Statistical analyses of continuous data in R
-  * Assumptions: normality and variance
+* Monday, May 21st – [Spot the trends: Statistical analyses of continuous data in R](/day9)
   * Correlation
   * Simple linear regression
+  * Assumptions: normality and variance
   * Multiple linear regression
-* Tuesday, May 22nd – Your cRystal ball: Predictive modeling and machine learning in R
-  * Dimensionality reduction and clustering
+* Tuesday, May 22nd – [Your cRystal ball: Predictive modeling and machine learning in R](/day10)
   * Categorical predictions: Classification
   * Continuous predictions: Regression
+  * Dimensionality reduction and clustering
 
 ## Course Material
 Presentations, R code, and datasets will be available from the course GitHub repository:
@@ -67,6 +67,7 @@ the code in question along with any data you’re using to the email.
 * R for Data Science - http://r4ds.had.co.nz/index.html
 * Cookbook for R - http://www.cookbook-r.com/
 * R Programming Wikibook - https://en.wikibooks.org/wiki/R_Programming
+* GitHub page for caret - https://topepo.github.io/caret/index.html
 * CRAN website - https://cran.r-project.org/
 * RStudio website - https://www.rstudio.com/
 * Tidyverse website - https://www.tidyverse.org/

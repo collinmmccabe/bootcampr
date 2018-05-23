@@ -15,6 +15,27 @@
 # machine learning models can also be applied retrospectively to understand
 # associations, but it is the predicting values that makes these models great!
 
+# Today we'll be doing "supervised" machine learning. There are typically two 
+# approaches to machine learning: supervised and unsupervised; the difference 
+# between these approaches is whether or not you tell the machine learning what
+# the "right" answers are in your training set- i.e. if you are making a 
+# regression model, what are the y-values; if you're making a classification
+# model, what are the categories into which things fall?Since supervised 
+# learning is by definition the more structured of the two approaches, it seemed
+# like the obvious place to start when teaching machine learning.
+
+# Many of the approaches and much of the code for this session are taken from
+# and/or adapted from Max Kuhn's website for caret, the most popular and most
+# user-friendly package for machine learning in R. Max Kuhn is the author of 
+# caret, and just as we went to Hadley Wickham's R4DS website for learning the 
+# tidyverse, we will be using the caret website / internet book for learning
+# caret and machine learning in R. The website can be found here:
+# https://topepo.github.io/caret/index.html - and just as with R4DS, we will
+# only be scratching the surface of what is possible with this stuff. If you 
+# want to learn more about caret and machine learning in R, look through the 
+# website above, and/or buy the somewhat companion-y book to this at:
+# http://appliedpredictivemodeling.com/
+
 #----------------------------------#
 # Regression (using linear models) #
 #----------------------------------#
@@ -97,7 +118,7 @@ sqrt(mean(error ^ 2))
 # sized splits of the data- these will be combined to create our training & test
 # sets. "cv" tells train that we want to do a crossfold, number tells it how 
 # many folds
-mpg_traincontrol <- trainControl(method = "cv", number = 5)
+mpg_traincontrol <- trainControl(method = "cv", number = 20)
 
 (mpgmod4 <- train(hwy ~ ., mpg, method = "lm", 
                   trControl = mpg_traincontrol))
@@ -115,10 +136,13 @@ predict(mpgmod4, new_data)
 # to fit a pattern that only actually exists because of the error in your data,
 # and due to the actual underlying pattern: this is what overfitting is. Only 
 # use polynomial terms when you are absolutely sure that your data fit them...
-(mpgmod5 <- train(hwy ~ poly(., 2), mpg, method = "lm", 
+(mpgmod7 <- train(hwy ~ cty, mpg, method = "lm", 
                   trControl = mpg_traincontrol))
 
-(mpgmod6 <- train(hwy ~ poly(., 3), mpg, method = "lm", 
+(mpgmod5 <- train(hwy ~ poly(cty, 2), mpg, method = "lm", 
+                  trControl = mpg_traincontrol))
+
+(mpgmod6 <- train(hwy ~ poly(cty, 3), mpg, method = "lm", 
                   trControl = mpg_traincontrol))
 
 ### EXERCISE ###
@@ -142,13 +166,10 @@ predict(mpgmod4, new_data)
 
 # For our classification example, we will be predicting whether or not something
 # is a hotdog from a variety of traits
-hotdog <- read_csv("data/hotdog.txt", 
+hotdog <- read_csv("data/hotdog.csv", 
                    col_names = c("tastiness", "ketchup", "bun",
                                  "ishotdog", "calories"))
 
-hotdog$ishotdog[12] <- 0
-hotdog$ishotdog[hotdog$ishotdog == 0] <- "No"
-hotdog$ishotdog[hotdog$ishotdog == 1] <- "Yes"
 hotdog$ishotdog <- factor(hotdog$ishotdog)
 
 # To predict whether something is one thing or another, we use the logistic
@@ -170,6 +191,14 @@ confusionMatrix(factor(round(probabilities)), hotdog$ishotdog)
 # our accuracies; here, we have a new parameter to set here: class probs, which
 # will give us the probability of whether something is a hotdog, similar to our
 # predict() function using type = "response"
+hotdog <- read_csv("data/hotdog.csv", 
+                   col_names = c("tastiness", "ketchup", "bun",
+                                 "ishotdog", "calories"))
+
+hotdog$ishotdog[hotdog$ishotdog == 0] <- "No"
+hotdog$ishotdog[hotdog$ishotdog == 1] <- "Yes"
+hotdog$ishotdog <- factor(hotdog$ishotdog)
+
 hot_traincontrol <- trainControl(method = "cv", number = 5, classProbs = TRUE)
 
 # Now let's run our model!
@@ -198,7 +227,8 @@ predict(hotmod2, isdefahotdog)
 #------------------------#
 
 # Clustering is useful when you have a small number of variables, but many 
-# categories into which individuals may fall.
+# categories into which individuals may fall. For this example, I've adapted 
+# much of the code from https://rpubs.com/njvijay/16444
 
 library(class)
 

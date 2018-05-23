@@ -60,6 +60,8 @@ vec2 <- c(3, 4, 4, 5, 6, 8)
 
 (vec1 %% 2 == 0) & (vec2 %% 2 == 0)  # for which elements are both values even?
 
+(vec1 %% 2 == 0) && (vec2 %% 2 == 0)
+
 (2 < 3) && (3 >= 3)  # comparison of single value booleans with double "&&"
 
 # Both the single and double "and" can be concatenated indefinitely
@@ -79,7 +81,7 @@ vec2 <- c(3, 4, 4, 5, 6, 8)
 # another, which means that this:
 FALSE || TRUE || TRUE || TRUE || TRUE || TRUE || TRUE || TRUE || TRUE || TRUE
 # ...will evaluate to FALSE faster than this will:
-TRUE || TRUE || TRUE || TRUE || TRUE || TRUE || TRUE || TRUE || TRUE || FALSE
+TRUE && TRUE && TRUE || TRUE || TRUE || TRUE || TRUE || TRUE || TRUE || FALSE
 
 # Finally, "xor",  or "exclusive or" evaluates to true only if one or the other 
 # of two joined conditions are true, but not if both are; it is calculated with
@@ -90,6 +92,7 @@ xor(TRUE, TRUE)
 # Logicals can come in really handy for slicing and subsetting arrays on a
 # certain condition
 vec1[vec1 %% 2 == 0]
+vec1[TRUE]
 
 # The same can be done with matrices, dataframes, lists, etc. But one neat thing
 # that you can do for subsetting dataframes is to subset one column based on the
@@ -105,7 +108,7 @@ mtcars[mtcars$am > 0, ]
 # conditional counting function in R, since TRUE == 1, summing the vector of
 # logicals is the same as counting all the TRUEs
 sum(vec1 %% 2 != 0)
-
+which(vec1 > 3)
 #---------------#
 # If Statements #
 #---------------#
@@ -329,12 +332,12 @@ for (x in s) {
 # The colon (:) is the simplest way to generate a sequence, it will produce a 
 # vector of all integers (no need to coerce or use the capital L notation) from 
 # the number before the colon to the number after it
-1:50
+50:1
 class(1:50)
 
 # seq() will generate a sequence of numerics (even if they look like integers)
 # from the from argument to the to argument, incremented by the by argument
-seq(from = 0, to = 50, by = 5)
+seq(from = 0, to = 50, by = 0.5)
 class(seq(from = 0, to = 50, by = 5))
 
 # Finally, the rep() argument will repeat a given value times argument times
@@ -350,7 +353,7 @@ rep(TRUE, times = 20)
 for (i in iterable) {
   print(i)
 }
-
+i
 # You can also iterate over an object using indices instead of iterating over
 # the items automatically
 for (i in 1:length(iterable)) {

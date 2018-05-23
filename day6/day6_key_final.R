@@ -42,6 +42,8 @@ filter(flights, month %in% c(11, 12))
 
 
 
+filter(flights, month %in% 7:9)
+
 filter(flights, month >= 7, month <= 9)
 
 filter(flights, between(month, 7, 9))
@@ -69,7 +71,7 @@ arrange(flights, year, month, day)
 
 # You can reverse the order so that items are sorted from largest to smallest by
 # using the desc() function in the argument.
-arrange(flights, desc(arr_delay))
+arrange(flights, desc(arr_time))
 
 ### TRY 5.3.1 EXERCISE 2 ###
 
@@ -77,7 +79,9 @@ arrange(flights, desc(arr_delay))
 
 arrange(flights, desc(dep_delay))
 
-arrange(flights, dep_time)
+arrange(flights, dep_delay)
+
+arrange(flights, dep_time - arr_time)
 
 #--------#
 # Select #
@@ -89,6 +93,7 @@ flights[c("year", "month", "day")]
 # If you list multiple items, you will select all of them
 select(flights, year, month, day)
 select(flights, year:day)
+flights["year":"day"]
 select(flights, -(year:day))
 
 # You can also use special search functions to find all variables that match a 
@@ -113,6 +118,7 @@ select(flights, time_hour, air_time, everything())
 ### TRY 5.4.1 EXERCISE 1 ###
 
 
+select(flights, 4, 6, 7, 9)
 
 select(flights, dep_time, dep_delay, arr_time, arr_delay)
 
@@ -163,7 +169,8 @@ mutate(flights,
 transmute(flights,
           gain = arr_delay - dep_delay,
           hours = air_time / 60,
-          gain_per_hour = gain / hours
+          gain_per_hour = gain / hours,
+          arr_time
 )
 
 ### TRY 5.5.2 EXERCISE 1 ###
@@ -206,5 +213,6 @@ popular_dests %>%
 flights %>%
   filter(!is.na(arr_delay), arr_delay > 0) %>%  
   group_by(dest) %>%
-  mutate(total_delay = sum(arr_delay),
-         prop_delay = arr_delay / sum(arr_delay))
+  transmute(total_delay = sum(arr_delay),
+            prop_delay = arr_delay / total_delay) %>%
+  select(dest, total_delay, prop_delay)

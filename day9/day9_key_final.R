@@ -10,7 +10,7 @@
 
 # We'll be working with the freeny dataset in base R today for the examples:
 datasets::freeny
-?freeny
+?freeny.x
 
 #--------------#
 # Correlations #
@@ -22,6 +22,8 @@ datasets::freeny
 # with another, statistically.  This is calculated with the cor() function in 
 # base R, which can be used on a single X & Y variable or many:
 cor(freeny$y, freeny$lag.quarterly.revenue)
+.997795 ^ 2
+summary(lm(y ~ lag.quarterly.revenue, freeny))
 
 # for all variables in the dataset
 cor(freeny)
@@ -34,8 +36,12 @@ cor(freeny)
 
 
 which(cor(mtcars) == max(cor(mtcars)[which(cor(mtcars) != 1)]))
-colnames(cor(mtcars)[14]); row.names(cor(mtcars)[14])
-which(cor(mtcars) == min(cor(mtcars)[which(cor(mtcars) != 1)]))
+colnames(cor(mtcars))[14 %/% 11]; colnames(cor(mtcars))[14 %/% 11 + 1]
+
+
+which(cor(mtcars) == min(cor(mtcars)[which(cor(mtcars) > 0)]))
+cor(mtcars)[6]
+colnames(cor(mtcars))[99 %% 11+11]; colnames(cor(mtcars))[99 %/% 11 + 1]
 
 #------------#
 # Regression #
@@ -60,7 +66,7 @@ a <- mean(Y) - b * mean(X)
 lmod1 <- lm(y ~ lag.quarterly.revenue, freeny)
 
 lmod1$coefficients[1]; a
-lmod1$coefficients[1]; b
+lmod1$coefficients[2]; b
 
 library(ggplot2)
 ggplot(freeny, aes(x = lag.quarterly.revenue, y = y)) + 
@@ -83,11 +89,7 @@ lm(mpg ~ disp, mtcars)
 #------------------------#
 
 # 1. The average of the population errors(residuals) is 0.
-# 2. The spread of errors above and below the regression line (ie the variance)
-#    is uniform for all values of X. Graphically this means that the actual
-#    observations for Yi for given values of Xi, fall within a uniform band around
-#    the population regression function (PRF).  The tech term is homoscedastic,
-#    meaning equal variance. 
+
 # 3. The errors associated with one observation is not associated with the
 #    errors from any other observations. in other words, we assume to
 #    autocorrelation among the error terms. If there is a relationship between
@@ -150,7 +152,7 @@ ggplot(freeny, aes(x = lag.quarterly.revenue, y = y)) +
 # Similar to the base R summary(), we can also use a tidyverse function, broom()
 install.packages("broom")
 library(broom)
-broom(lmod1)
+tidy(lmod1)
 
 # The p-value, however, does not tell the whole story for a linear model, 
 # because we don't know how well the data fits the model, only that its slope
