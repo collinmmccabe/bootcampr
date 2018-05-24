@@ -59,17 +59,17 @@ repository to keep track of your progress throughout the course.
 ## Instructor Availability
 I will do my best to be around during the hackathon and code sprint to answer any questions or
 solve any problems that might arise. If, however, I’m not around and you can’t figure something
-out, feel free to email your questions to me at collinmichaelmccabe@gmail.com – I’ll respond to
+out, feel free to email your questions to me at [collinmichaelmccabe@gmail.com](mailto:collinmichaelmccabe@gmail.com) – I’ll respond to
 your query within 24 hours. If your question involves some sort of bug in your code, please attach
 the code in question along with any data you’re using to the email.
 
 ## Useful Resources
-* R for Data Science - (http://r4ds.had.co.nz/index.html)
-* Cookbook for R - http://www.cookbook-r.com/
-* R Programming Wikibook - https://en.wikibooks.org/wiki/R_Programming
-* GitHub page for caret - https://topepo.github.io/caret/index.html
-* CRAN website - https://cran.r-project.org/
-* RStudio website - https://www.rstudio.com/
-* Tidyverse website - https://www.tidyverse.org/
-* Stack Overflow (for programming questions) - https://stackoverflow.com/questions/tagged/r
-* Cross Validated (for statistics questions) - https://stats.stackexchange.com/questions/tagged/r
+* [R for Data Science](http://r4ds.had.co.nz/index.html)
+* [Cookbook for R](http://www.cookbook-r.com/)
+* [R Programming Wikibook](https://en.wikibooks.org/wiki/R_Programming)
+* [GitHub page for caret](https://topepo.github.io/caret/index.html)
+* [CRAN website](https://cran.r-project.org/)
+* [RStudio website](https://www.rstudio.com/)
+* [Tidyverse website](https://www.tidyverse.org/)
+* [Stack Overflow (for programming questions)](https://stackoverflow.com/questions/tagged/r)
+* [Cross Validated (for statistics questions)](https://stats.stackexchange.com/questions/tagged/r)
