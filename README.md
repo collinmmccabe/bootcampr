@@ -2,42 +2,42 @@
 ### Collin M. McCabe, Ph. D. - collinmichaelmccabe@gmail.com
 
 ## Schedule
-* Wednesday, May 9th – [Back to base-ics: Installing and getting familiar with base R](https://github.com/collinmmccabe/bootcampR/tree/master/day1)
+* Wednesday, May 9th – [Back to base-ics: Installing and getting familiar with base R](https://github.com/collinmmccabe/bootcampR/tree/master/day01)
   * Math
   * Variables
   * Functions
-* Thursday, May 10th – [Structuring your thoughts: Introduction to data structures in base R](https://github.com/collinmmccabe/bootcampR/tree/master/day2)
+* Thursday, May 10th – [Structuring your thoughts: Introduction to data structures in base R](https://github.com/collinmmccabe/bootcampR/tree/master/day02)
   * Vectors
   * Matrices
   * Data frames
   * Lists
-* Friday, May 11th – [“if” only “for” a “while”: Control flow in base R](https://github.com/collinmmccabe/bootcampR/tree/master/day3)
+* Friday, May 11th – [“if” only “for” a “while”: Control flow in base R](https://github.com/collinmmccabe/bootcampR/tree/master/day03)
   * Conditionals
   * If-else statements
   * Loops
-* Monday, May 14th – [Putting the data in “Data Science”: Importing from files, databases, web](https://github.com/collinmmccabe/bootcampR/tree/master/day4)
+* Monday, May 14th – [Putting the data in “Data Science”: Importing from files, databases, web](https://github.com/collinmmccabe/bootcampR/tree/master/day04)
   * “Flat” files
   * Relational databases
   * Web APIs
-* Tuesday, May 15th – [Tidying up a bit: Introduction to “tidy” data and cleaning data with tidyr](https://github.com/collinmmccabe/bootcampR/tree/master/day5)
+* Tuesday, May 15th – [Tidying up a bit: Introduction to “tidy” data and cleaning data with tidyr](https://github.com/collinmmccabe/bootcampR/tree/master/day05)
   * Tidy data and tibbles
   * Gathering/spreading
   * Data maintenance: type errors, NAs, etc
   * Factors as a special data class
-* Wednesday, May 16th – [Being manipulative: Using dplyr to manipulate data in R](https://github.com/collinmmccabe/bootcampR/tree/master/day6)
+* Wednesday, May 16th – [Being manipulative: Using dplyr to manipulate data in R](https://github.com/collinmmccabe/bootcampR/tree/master/day06)
   * Subsetting with select and filter
   * Reordering with arrange
   * Deriving variables with mutate
   * Linking with pipes
-* Thursday, May 17th – [Getting visual: Data visualization and exploratory analysis in R](https://github.com/collinmmccabe/bootcampR/tree/master/day7)
+* Thursday, May 17th – [Getting visual: Data visualization and exploratory analysis in R](https://github.com/collinmmccabe/bootcampR/tree/master/day07)
   * Summary statistics and summarise
   * Visualizing distributions
   * Visualizing comparisons
-* Friday, May 18th – [Spot the differences: Statistical analyses of categorical data in R](https://github.com/collinmmccabe/bootcampR/tree/master/day8)
+* Friday, May 18th – [Spot the differences: Statistical analyses of categorical data in R](https://github.com/collinmmccabe/bootcampR/tree/master/day08)
   * Pure categorical: Chi-square test
   * Simple comparisons: t-test
   * Multiple comparisons: ANOVA
-* Monday, May 21st – [Spot the trends: Statistical analyses of continuous data in R](https://github.com/collinmmccabe/bootcampR/tree/master/day9)
+* Monday, May 21st – [Spot the trends: Statistical analyses of continuous data in R](https://github.com/collinmmccabe/bootcampR/tree/master/day09)
   * Correlation
   * Simple linear regression
   * Assumptions: normality and variance
