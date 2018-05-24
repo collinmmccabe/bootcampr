@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Erdos Institute Bootcamp for R</title>
+  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook.">
+  <meta name="generator" content="bookdown 0.7.11 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Erdos Institute Bootcamp for R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Erdos Institute Bootcamp for R" />
+  
+  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+<meta name="author" content="Collin M. McCabe">
+
+
+<meta name="date" content="2018-05-23">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="and-if-youd-like-to-assign-and-print-your-variable-in-the-same-line.html">
+<link rel="next" href="original-value.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Prerequisites</a></li>
+<li class="chapter" data-level="2" data-path="the-basics-of-r.html"><a href="the-basics-of-r.html"><i class="fa fa-check"></i><b>2</b> The Basics of R</a><ul>
+<li class="chapter" data-level="2.1" data-path="the-basics-of-r.html"><a href="the-basics-of-r.html#math"><i class="fa fa-check"></i><b>2.1</b> Math</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="order-of-operations.html"><a href="order-of-operations.html"><i class="fa fa-check"></i><b>3</b> Order of Operations:</a></li>
+<li class="chapter" data-level="4" data-path="exponents-right-to-left.html"><a href="exponents-right-to-left.html"><i class="fa fa-check"></i><b>4</b> 1. Exponents (right to left)</a></li>
+<li class="chapter" data-level="5" data-path="modulo-left-to-right.html"><a href="modulo-left-to-right.html"><i class="fa fa-check"></i><b>5</b> 2. Modulo (left to right)</a></li>
+<li class="chapter" data-level="6" data-path="multiplication-division-left-to-right.html"><a href="multiplication-division-left-to-right.html"><i class="fa fa-check"></i><b>6</b> 3. Multiplication &amp; Division (left to right)</a></li>
+<li class="chapter" data-level="7" data-path="addition-subtraction-left-to-right.html"><a href="addition-subtraction-left-to-right.html"><i class="fa fa-check"></i><b>7</b> 4. Addition &amp; Subtraction (left to right)</a></li>
+<li class="chapter" data-level="8" data-path="you-can-alter-the-order-of-operations-with-parentheses.html"><a href="you-can-alter-the-order-of-operations-with-parentheses.html"><i class="fa fa-check"></i><b>8</b> You can alter the order of operations with parentheses</a></li>
+<li class="chapter" data-level="9" data-path="r-also-has-lots-of-built-in-math-functions-more-on-functions-later.html"><a href="r-also-has-lots-of-built-in-math-functions-more-on-functions-later.html"><i class="fa fa-check"></i><b>9</b> R also has lots of built-in math functions (more on functions later)</a></li>
+<li class="chapter" data-level="10" data-path="choose-2.html"><a href="choose-2.html"><i class="fa fa-check"></i><b>10</b> 8 choose 2</a></li>
+<li class="chapter" data-level="11" data-path="the-log-function-computes-natural-logs-by-default-but-you-can-also-select.html"><a href="the-log-function-computes-natural-logs-by-default-but-you-can-also-select.html"><i class="fa fa-check"></i><b>11</b> The log() function computes natural logs by default, but you can also select</a></li>
+<li class="chapter" data-level="12" data-path="other-options-for-this-using-the-base-argument-in-the-function-or-you-can.html"><a href="other-options-for-this-using-the-base-argument-in-the-function-or-you-can.html"><i class="fa fa-check"></i><b>12</b> other options for this using the base argument in the function, or you can</a></li>
+<li class="chapter" data-level="13" data-path="use-base-10-log-using-the-function-log10.html"><a href="use-base-10-log-using-the-function-log10.html"><i class="fa fa-check"></i><b>13</b> use base-10 log using the function log10()</a></li>
+<li class="chapter" data-level="14" data-path="pi-is-a-pre-defined-constant-in-r-accessible-by-just-typing-pi.html"><a href="pi-is-a-pre-defined-constant-in-r-accessible-by-just-typing-pi.html"><i class="fa fa-check"></i><b>14</b> pi is a pre-defined constant in R, accessible by just typing pi</a></li>
+<li class="chapter" data-level="15" data-path="trigonometric-functions-use-radians-by-default.html"><a href="trigonometric-functions-use-radians-by-default.html"><i class="fa fa-check"></i><b>15</b> Trigonometric functions use radians by default</a></li>
+<li class="chapter" data-level="16" data-path="section.html"><a href="section.html"><i class="fa fa-check"></i><b>16</b> ———–</a></li>
+<li class="chapter" data-level="17" data-path="variables.html"><a href="variables.html"><i class="fa fa-check"></i><b>17</b> Variables</a></li>
+<li class="chapter" data-level="18" data-path="section-1.html"><a href="section-1.html"><i class="fa fa-check"></i><b>18</b> ———–</a></li>
+<li class="chapter" data-level="19" data-path="variables-are-an-easy-way-to-store-pretty-much-anything-that-you-may-want-to.html"><a href="variables-are-an-easy-way-to-store-pretty-much-anything-that-you-may-want-to.html"><i class="fa fa-check"></i><b>19</b> Variables are an easy way to store pretty much anything that you may want to</a></li>
+<li class="chapter" data-level="20" data-path="use-later-in-your-code-like-in-python-you-can-use-the-equal-sign-for-this.html"><a href="use-later-in-your-code-like-in-python-you-can-use-the-equal-sign-for-this.html"><i class="fa fa-check"></i><b>20</b> use later in your code. Like in Python, you can use the equal sign for this</a></li>
+<li class="chapter" data-level="21" data-path="you-may-have-noticed-by-now-that-i-use-spaces-between-pretty-much-everything-.html"><a href="you-may-have-noticed-by-now-that-i-use-spaces-between-pretty-much-everything-.html"><i class="fa fa-check"></i><b>21</b> You may have noticed by now that I use spaces between pretty much everything.</a></li>
+<li class="chapter" data-level="22" data-path="this-isnt-necessary-but-it-is-stylistically-preferred-for-instance-this.html"><a href="this-isnt-necessary-but-it-is-stylistically-preferred-for-instance-this.html"><i class="fa fa-check"></i><b>22</b> This isn’t necessary, but it is stylistically preferred. For instance, this</a></li>
+<li class="chapter" data-level="23" data-path="will-do-the-same-thing-as-the-above-line.html"><a href="will-do-the-same-thing-as-the-above-line.html"><i class="fa fa-check"></i><b>23</b> will do the same thing as the above line</a></li>
+<li class="chapter" data-level="24" data-path="however-the-preferred-notation-for-variable-assignment-in-r-is-.html"><a href="however-the-preferred-notation-for-variable-assignment-in-r-is-.html"><i class="fa fa-check"></i><b>24</b> However, the preferred notation for variable assignment in R is &lt;-</a></li>
+<li class="chapter" data-level="25" data-path="this-is-because-by-default-the-item-on-the-right-is-always-assigned-to.html"><a href="this-is-because-by-default-the-item-on-the-right-is-always-assigned-to.html"><i class="fa fa-check"></i><b>25</b> This is because, by default, the item on the right is always assigned to</a></li>
+<li class="chapter" data-level="26" data-path="the-item-on-the-left-the-arrow-allows-you-to-keep-track-of-this-better.html"><a href="the-item-on-the-left-the-arrow-allows-you-to-keep-track-of-this-better.html"><i class="fa fa-check"></i><b>26</b> the item on the left. The arrow allows you to keep track of this better</a></li>
+<li class="chapter" data-level="27" data-path="you-can-see-whats-stored-in-the-variable-using-print.html"><a href="you-can-see-whats-stored-in-the-variable-using-print.html"><i class="fa fa-check"></i><b>27</b> You can see what’s stored in the variable using print()</a></li>
+<li class="chapter" data-level="28" data-path="but-unlike-in-python-you-dont-have-to-actully-type-print-this-is.html"><a href="but-unlike-in-python-you-dont-have-to-actully-type-print-this-is.html"><i class="fa fa-check"></i><b>28</b> But, unlike in Python, you don’t have to actully type print(); this is</a></li>
+<li class="chapter" data-level="29" data-path="actually-what-youve-been-doing-all-along-with-the-other-examples-so-far.html"><a href="actually-what-youve-been-doing-all-along-with-the-other-examples-so-far.html"><i class="fa fa-check"></i><b>29</b> actually what you’ve been doing all along with the other examples so far</a></li>
+<li class="chapter" data-level="30" data-path="and-if-youd-like-to-assign-and-print-your-variable-in-the-same-line.html"><a href="and-if-youd-like-to-assign-and-print-your-variable-in-the-same-line.html"><i class="fa fa-check"></i><b>30</b> And, if you’d like to assign and print your variable in the same line</a></li>
+<li class="chapter" data-level="31" data-path="when-you-have-a-variable-you-can-do-anything-with-it-that-you-could-with-the.html"><a href="when-you-have-a-variable-you-can-do-anything-with-it-that-you-could-with-the.html"><i class="fa fa-check"></i><b>31</b> When you have a variable, you can do anything with it that you could with the</a></li>
+<li class="chapter" data-level="32" data-path="original-value.html"><a href="original-value.html"><i class="fa fa-check"></i><b>32</b> original value</a></li>
+<li class="chapter" data-level="33" data-path="and-we-can-assign-the-results-of-operations-directly-to-new-variables.html"><a href="and-we-can-assign-the-results-of-operations-directly-to-new-variables.html"><i class="fa fa-check"></i><b>33</b> And we can assign the results of operations directly to new variables</a></li>
+<li class="chapter" data-level="34" data-path="you-can-name-variables-anything-you-want-with-some-exceptions-including.html"><a href="you-can-name-variables-anything-you-want-with-some-exceptions-including.html"><i class="fa fa-check"></i><b>34</b> (you can name variables anything you want, with some exceptions, including:</a></li>
+<li class="chapter" data-level="35" data-path="no-spaces-no-quotation-marks-no-operators-like-my-variable-10-y.html"><a href="no-spaces-no-quotation-marks-no-operators-like-my-variable-10-y.html"><i class="fa fa-check"></i><b>35</b> no spaces, no quotation marks, no operators like +-/*^%&gt;&lt;=!) My_Variable &lt;- 10 + y</a></li>
+<li class="chapter" data-level="36" data-path="and-you-can-also-re-assign-values-to-variables-for-instance-x-was-previously.html"><a href="and-you-can-also-re-assign-values-to-variables-for-instance-x-was-previously.html"><i class="fa fa-check"></i><b>36</b> And you can also re-assign values to variables- for instance, x was previously</a></li>
+<li class="chapter" data-level="37" data-path="set-to-42-lets-see-what-happens-when-we-assign-12-to-it.html"><a href="set-to-42-lets-see-what-happens-when-we-assign-12-to-it.html"><i class="fa fa-check"></i><b>37</b> set to 42; let’s see what happens when we assign 12 to it…</a></li>
+<li class="chapter" data-level="38" data-path="values-of-variables-are-calculated-at-assignment-and-are-almost-never.html"><a href="values-of-variables-are-calculated-at-assignment-and-are-almost-never.html"><i class="fa fa-check"></i><b>38</b> Values of variables are calculated at assignment, and are (almost never)</a></li>
+<li class="chapter" data-level="39" data-path="recalculated-on-the-fly-if-a-variable-was-used-to-assign-a-value-to-another.html"><a href="recalculated-on-the-fly-if-a-variable-was-used-to-assign-a-value-to-another.html"><i class="fa fa-check"></i><b>39</b> recalculated on the fly (if a variable was used to assign a value to another</a></li>
+<li class="chapter" data-level="40" data-path="variable-changing-the-value-of-one-after-assignment-will-not-affect-the-value.html"><a href="variable-changing-the-value-of-one-after-assignment-will-not-affect-the-value.html"><i class="fa fa-check"></i><b>40</b> variable, changing the value of one after assignment will not affect the value</a></li>
+<li class="chapter" data-level="41" data-path="of-the-other-they-are-immutable-and-not-passed-by-reference-for-assignment.html"><a href="of-the-other-they-are-immutable-and-not-passed-by-reference-for-assignment.html"><i class="fa fa-check"></i><b>41</b> of the other- they are immutable and not passed by reference for assignment)</a></li>
+<li class="chapter" data-level="42" data-path="variables-can-be-of-many-different-types-or-classes-in-r.html"><a href="variables-can-be-of-many-different-types-or-classes-in-r.html"><i class="fa fa-check"></i><b>42</b> Variables can be of many different types, or classes, in R:</a></li>
+<li class="chapter" data-level="43" data-path="null.html"><a href="null.html"><i class="fa fa-check"></i><b>43</b> Null</a></li>
+<li class="chapter" data-level="44" data-path="numeric.html"><a href="numeric.html"><i class="fa fa-check"></i><b>44</b> Numeric</a></li>
+<li class="chapter" data-level="45" data-path="integer-must-be-stated-strictly.html"><a href="integer-must-be-stated-strictly.html"><i class="fa fa-check"></i><b>45</b> Integer (must be stated strictly)</a></li>
+<li class="chapter" data-level="46" data-path="logical-true-or-false-a-k-a-boolean.html"><a href="logical-true-or-false-a-k-a-boolean.html"><i class="fa fa-check"></i><b>46</b> Logical (True or False, a.k.a. Boolean)</a></li>
+<li class="chapter" data-level="47" data-path="character.html"><a href="character.html"><i class="fa fa-check"></i><b>47</b> Character</a></li>
+<li class="chapter" data-level="48" data-path="section-2.html"><a href="section-2.html"><i class="fa fa-check"></i><b>48</b> ———–</a></li>
+<li class="chapter" data-level="49" data-path="functions.html"><a href="functions.html"><i class="fa fa-check"></i><b>49</b> Functions</a></li>
+<li class="chapter" data-level="50" data-path="section-3.html"><a href="section-3.html"><i class="fa fa-check"></i><b>50</b> ———–</a></li>
+<li class="chapter" data-level="51" data-path="if-you-have-certain-tasks-that-you-do-a-lot-in-r-the-best-way-to-save-time-is.html"><a href="if-you-have-certain-tasks-that-you-do-a-lot-in-r-the-best-way-to-save-time-is.html"><i class="fa fa-check"></i><b>51</b> If you have certain tasks that you do a lot in R, the best way to save time is</a></li>
+<li class="chapter" data-level="52" data-path="to-automate-these-tasks-by-writing-functions-this-may-sound-daunting-but-it.html"><a href="to-automate-these-tasks-by-writing-functions-this-may-sound-daunting-but-it.html"><i class="fa fa-check"></i><b>52</b> to automate these tasks by writing functions. This may sound daunting, but it</a></li>
+<li class="chapter" data-level="53" data-path="really-isnt-functions-have-only-three-key-parts-argument-body-and-return.html"><a href="really-isnt-functions-have-only-three-key-parts-argument-body-and-return.html"><i class="fa fa-check"></i><b>53</b> really isn’t- functions have only three key parts: argument, body, and return</a></li>
+<li class="chapter" data-level="54" data-path="the-way-you-create-a-function-in-r-is-very-similar-to-how-you-would-create-a.html"><a href="the-way-you-create-a-function-in-r-is-very-similar-to-how-you-would-create-a.html"><i class="fa fa-check"></i><b>54</b> The way you create a function in R is very similar to how you would create a</a></li>
+<li class="chapter" data-level="55" data-path="variable-for-this-function-we-are-just-multiplying-a-number-by-two.html"><a href="variable-for-this-function-we-are-just-multiplying-a-number-by-two.html"><i class="fa fa-check"></i><b>55</b> variable. For this function, we are just multiplying a number by two</a></li>
+<li class="chapter" data-level="56" data-path="you-can-also-make-functions-that-take-multiple-inputs-or-arguments-but-you.html"><a href="you-can-also-make-functions-that-take-multiple-inputs-or-arguments-but-you.html"><i class="fa fa-check"></i><b>56</b> You can also make functions that take multiple inputs, or arguments (but you</a></li>
+<li class="chapter" data-level="57" data-path="dont-have-to-name-them-argument-like-i-did-in-the-first-example-you-do.html"><a href="dont-have-to-name-them-argument-like-i-did-in-the-first-example-you-do.html"><i class="fa fa-check"></i><b>57</b> don’t have to name them “argument” like I did in the first example; you do</a></li>
+<li class="chapter" data-level="58" data-path="have-to-use-the-word-function-when-creating-a-function-though-and-you.html"><a href="have-to-use-the-word-function-when-creating-a-function-though-and-you.html"><i class="fa fa-check"></i><b>58</b> have to use the word “function” when creating a function though, and you</a></li>
+<li class="chapter" data-level="59" data-path="should-also-use-return-at-the-end-of-the-function.html"><a href="should-also-use-return-at-the-end-of-the-function.html"><i class="fa fa-check"></i><b>59</b> should also use “return” at the end of the function)</a></li>
+<li class="chapter" data-level="60" data-path="but-it-is-important-to-note-that-named-arguments-are-only-accessible-within.html"><a href="but-it-is-important-to-note-that-named-arguments-are-only-accessible-within.html"><i class="fa fa-check"></i><b>60</b> But it is important to note that named arguments are only accessible within</a></li>
+<li class="chapter" data-level="61" data-path="the-function-where-they-appear.html"><a href="the-function-where-they-appear.html"><i class="fa fa-check"></i><b>61</b> the function where they appear</a></li>
+<li class="chapter" data-level="62" data-path="the-same-goes-for-variables-that-are-initialized-within-functions.html"><a href="the-same-goes-for-variables-that-are-initialized-within-functions.html"><i class="fa fa-check"></i><b>62</b> …the same goes for variables that are initialized within functions</a></li>
+<li class="chapter" data-level="63" data-path="this-is-due-to-a-phenomenon-called-lexical-scoping-variables-will-only-be.html"><a href="this-is-due-to-a-phenomenon-called-lexical-scoping-variables-will-only-be.html"><i class="fa fa-check"></i><b>63</b> This is due to a phenomenon called lexical scoping: variables will only be</a></li>
+<li class="chapter" data-level="64" data-path="available-or-changeable-in-the-the-context-in-which-they-are-created-and-all.html"><a href="available-or-changeable-in-the-the-context-in-which-they-are-created-and-all.html"><i class="fa fa-check"></i><b>64</b> available or changeable in the the context in which they are created (and all</a></li>
+<li class="chapter" data-level="65" data-path="contexts-that-are-built-from-that-context-this-means-that-a-variable-that-is.html"><a href="contexts-that-are-built-from-that-context-this-means-that-a-variable-that-is.html"><i class="fa fa-check"></i><b>65</b> contexts that are built from that context). This means that a variable that is</a></li>
+<li class="chapter" data-level="66" data-path="initialized-outside-of-a-function-in-the-global-scope-will-be-available.html"><a href="initialized-outside-of-a-function-in-the-global-scope-will-be-available.html"><i class="fa fa-check"></i><b>66</b> initialized outside of a function (in the “global” scope) will be available</a></li>
+<li class="chapter" data-level="67" data-path="in-both-the-global-and-function-scope-remember-that-we-initialized-z-to-2.html"><a href="in-both-the-global-and-function-scope-remember-that-we-initialized-z-to-2.html"><i class="fa fa-check"></i><b>67</b> in both the global and function scope; remember that we initialized z to -2</a></li>
+<li class="chapter" data-level="68" data-path="but-if-we-change-the-value-of-a-global-variable-in-the-function-scope-this.html"><a href="but-if-we-change-the-value-of-a-global-variable-in-the-function-scope-this.html"><i class="fa fa-check"></i><b>68</b> …but if we change the value of a global variable in the function scope, this</a></li>
+<li class="chapter" data-level="69" data-path="will-not-carry-back-over-to-the-more-general-global-scope.html"><a href="will-not-carry-back-over-to-the-more-general-global-scope.html"><i class="fa fa-check"></i><b>69</b> will not carry back over to the more general global scope</a></li>
+<li class="chapter" data-level="70" data-path="one-last-thing-about-functions-for-today-you-can-save-the-return-values-of.html"><a href="one-last-thing-about-functions-for-today-you-can-save-the-return-values-of.html"><i class="fa fa-check"></i><b>70</b> One last thing about functions for today: you can save the return values of</a></li>
+<li class="chapter" data-level="71" data-path="functions-as-variables-this-will-make-it-so-that-you-dont-have-to.html"><a href="functions-as-variables-this-will-make-it-so-that-you-dont-have-to.html"><i class="fa fa-check"></i><b>71</b> functions as variables- this will make it so that you don’t have to</a></li>
+<li class="chapter" data-level="72" data-path="recalculate-functions-each-time-you-want-to-use-the-same-output.html"><a href="recalculate-functions-each-time-you-want-to-use-the-same-output.html"><i class="fa fa-check"></i><b>72</b> recalculate functions each time you want to use the same output</a></li>
+<li class="chapter" data-level="73" data-path="theres-a-lot-more-that-you-can-do-with-functions-and-well-come-back-to.html"><a href="theres-a-lot-more-that-you-can-do-with-functions-and-well-come-back-to.html"><i class="fa fa-check"></i><b>73</b> There’s a lot more that you can do with functions, and we’ll come back to</a></li>
+<li class="chapter" data-level="74" data-path="functions-throughout-the-course-as-we-get-deeper-into-rs-capabilities.html"><a href="functions-throughout-the-course-as-we-get-deeper-into-rs-capabilities.html"><i class="fa fa-check"></i><b>74</b> functions throughout the course as we get deeper into R’s capabilities!</a></li>
+<li class="chapter" data-level="75" data-path="its-best-practice-with-r-code-to-always-end-your-script-with-an-empty-line.html"><a href="its-best-practice-with-r-code-to-always-end-your-script-with-an-empty-line.html"><i class="fa fa-check"></i><b>75</b> It’s best practice with R code to always end your script with an empty line</a></li>
+<li class="chapter" data-level="76" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>76</b> Introduction</a></li>
+<li class="chapter" data-level="77" data-path="literature.html"><a href="literature.html"><i class="fa fa-check"></i><b>77</b> Literature</a></li>
+<li class="chapter" data-level="78" data-path="methods.html"><a href="methods.html"><i class="fa fa-check"></i><b>78</b> Methods</a></li>
+<li class="chapter" data-level="79" data-path="applications.html"><a href="applications.html"><i class="fa fa-check"></i><b>79</b> Applications</a><ul>
+<li class="chapter" data-level="79.1" data-path="applications.html"><a href="applications.html#example-one"><i class="fa fa-check"></i><b>79.1</b> Example one</a></li>
+<li class="chapter" data-level="79.2" data-path="applications.html"><a href="applications.html#example-two"><i class="fa fa-check"></i><b>79.2</b> Example two</a></li>
+</ul></li>
+<li class="chapter" data-level="80" data-path="final-words.html"><a href="final-words.html"><i class="fa fa-check"></i><b>80</b> Final Words</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Erdos Institute Bootcamp for R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="when-you-have-a-variable-you-can-do-anything-with-it-that-you-could-with-the" class="section level1">
+<h1><span class="header-section-number">Chapter 31</span> When you have a variable, you can do anything with it that you could with the</h1>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="and-if-youd-like-to-assign-and-print-your-variable-in-the-same-line.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="original-value.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/01-intro.Rmd",
+"text": "Edit"
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
