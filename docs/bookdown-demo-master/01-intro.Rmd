@@ -27,7 +27,7 @@ getwd()
 
 I forgot- I put the welcome script within the folder "~/day1/Welcome/", `setwd` there. If you're using RStudio, as you can autocomplete filenames with the tab key.
 ```{r, eval=FALSE}
-setwd("bootcampR/day1/Welcome/")
+setwd("bootcampR/day01/Welcome/")
 ```
 
 If you're not a fan of doing things through the command line/script (soon you
@@ -38,7 +38,7 @@ setwd(choose.dir())
 
 Now we can finally run the welcome script
 ```{r}
-source("../../day1/Welcome/welcome.R")
+source("../../day01/Welcome/welcome.R")
 ```
 
 Just like you can use a GUI to choose a folder, you can do the same for files
@@ -62,163 +62,223 @@ Addition
 ```
 
 Subtraction
+```{r}
 2 - 1
+```
 
 Multiplication
+```{r}
 2 * 3
+```
 
 Division
+```{r}
 4 / 2
+```
 
 Exponents
+```{r}
 3 ^ 2
+```
 
 Modulo (a.k.a. Remainder)
+```{r}
 5 %% 2
+```
 
 Integer (Floor) Division
+```{r}
 5 %/% 2
+```
 
-# Order of Operations:
-# 1. Exponents (right to left)
-# 2. Modulo (left to right)
-# 3. Multiplication & Division (left to right)
-# 4. Addition & Subtraction (left to right)
+Math in R follows the same basic order of operations that you mathematicians 
+follow in your everyday work:
+
+1. Exponents (right to left)
+2. Modulo (left to right)
+3. Multiplication & Division (left to right)
+4. Addition & Subtraction (left to right)
+
+```{r}
 8 + 16 * 2 / 4 ^ 2 %% 3
+```
 
-# You can alter the order of operations with parentheses
+You can, however, alter the order of operations with parentheses in creative 
+places:
+```{r}
 ((8 + 16) * 2 / 4) ^ (2 %% 3)
+```
 
-# R also has lots of built-in math functions (more on functions later)
-abs(-3)
-sqrt(64)
-factorial(4)
+R also has lots of built-in math functions (more on functions later)
+```{r}
 
-# 8 choose 2
-choose(8, 2)
+abs(-3)       # absolute value
+sqrt(64)      # square root
+factorial(4)  # factorial
+choose(8, 2)  # n choose m
+```
 
-# The log() function computes natural logs by default, but you can also select
-# other options for this using the base argument in the function, or you can
-# use base-10 log using the function log10()
-log(30)
-log(64, base = 8)
-log10(100)
+The `log` function computes natural logs by default, but you can also select
+other options for this using the `base = ...` argument in the function, or you 
+can compute base-10 log using the function `log10`
+```{r}
+log(30)            # natural log (base e)
+log(64, base = 8)  # log, base 8
+log10(100)         # log, base 10
+```
 
-# pi is a pre-defined constant in R, accessible by just typing pi
+$\pi$ is a pre-defined constant in R, accessible by just typing `pi`
+```{r}
 pi
+```
 
-# Trigonometric functions use radians by default
+Trigonometric functions use radians by default
+```{r}
 sin(pi / 2)
 cos(pi)
 tan(pi / 4)
+```
 
-#-----------#
-# Variables #
-#-----------#
+## Variables
 
-# Variables are an easy way to store pretty much anything that you may want to
-# use later in your code. Like in Python, you can use the equal sign for this
+Variables are an easy way to store pretty much anything that you may want to
+use later in your code. Like in Python, you can use the equal sign for this
+```{r}
 x = 42
+```
 
-# You may have noticed by now that I use spaces between pretty much everything.
-# This isn't necessary, but it is stylistically preferred. For instance, this
-# will do the same thing as the above line
+You may have noticed by now that I use spaces between pretty much everything.
+This isn't necessary, but it is stylistically preferred. For instance, this
+will do the same thing as the above,  lineButWhenYouHaveNoSpacesBetweenYourOperationsThingsCanGetHardToRead.
+```{r}
 x=42
-#ButWhenYouHaveNoSpacesBetweenYourOperationsThingsCanGetHardToRead
+```
 
-# However, the preferred notation for variable assignment in R is <-
-# This is because, by default, the item on the right is always assigned to
-# the item on the left. The arrow allows you to keep track of this better
+However, the preferred notation for variable assignment in R is `<-`
+This is because, by default, the item on the right is always assigned to
+the item on the left. The arrow allows you to keep track of this better
+```{r}
 y <- 10
+```
 
-# You can see what's stored in the variable using print()
+You can see what's stored in the variable using `print`
+```{r}
 print(y)
+```
 
-# But, unlike in Python, you don't have to actully type print(); this is
-# actually what you've been doing all along with the other examples so far
+But, unlike in Python, you don't have to actully type `print`; this is
+actually what you've been doing all along with the other examples so far
+```{r}
 y
+```
 
-# And, if you'd like to assign and print your variable in the same line
+And, if you'd like to assign and print your variable in the same line, use 
+parentheses:
+```{r}
 (z <- -2)
+```
 
-# When you have a variable, you can do anything with it that you could with the
-# original value
+When you have a variable, you can do anything with it that you could with the
+original value
+```{r}
 z + 10
 x + y
+```
 
-# And we can assign the results of operations directly to new variables
-# (you can name variables anything you want, with some exceptions, including:
-# no spaces, no quotation marks, no operators like +-/*^%><=!)
+And we can assign the results of operations directly to new variables
+(you can name variables anything you want, with some exceptions, including:
+no spaces, no quotation marks, no operators like +-/*^%><=!)
+```{r}
 My_Variable <- 10 + y
+```
 
-# And you can also re-assign values to variables- for instance, x was previously
-# set to 42; let's see what happens when we assign 12 to it...
+And you can also re-assign values to variables- for instance, x was previously
+set to 42; let's see what happens when we assign 12 to it...
+```{r}
 x
 x <- 12
 x
+```
 
-# Values of variables are calculated at assignment, and are (almost never)
-# recalculated on the fly (if a variable was used to assign a value to another
-# variable, changing the value of one after assignment will not affect the value
-# of the other- they are immutable and not passed by reference for assignment)
+Values of variables are calculated at assignment, and are (almost never)
+recalculated on the fly (if a variable was used to assign a value to another
+variable, changing the value of one after assignment will not affect the value
+of the other- they are immutable and not passed by reference for assignment)
+```{r}
 (NewVar <- x + y)
 y <- 24
 NewVar
+```
 
-# Variables can be of many different types, or classes, in R:
-# Null
+Variables can be of many different types, or classes, in R:
+Null (empty):
+```{r}
 i <- NULL
 class(i)
+```
 
-# Numeric
+Numeric (float / double):
+```{r}
 j <- 2
 class(j)
+```
 
-# Integer (must be stated strictly)
+Integer (must be stated strictly):
+```{r}
 k <- as.integer(4)
 class(k)
+```
 
-# Logical (True or False, a.k.a. Boolean)
+Logical (True or False, a.k.a. Boolean):
+```{r}
 l <- TRUE
 class(l)
+```
 
-# Character
+Character (string):
+```{r}
 m <- "a"
 class(m)
+```
 
-#-----------#
-# Functions #
-#-----------#
+## Functions
 
-# If you have certain tasks that you do a lot in R, the best way to save time is
-# to automate these tasks by writing functions. This may sound daunting, but it
-# really isn't- functions have only three key parts: argument, body, and return
+If you have certain tasks that you do a lot in R, the best way to save time is
+to automate these tasks by writing functions. This may sound daunting, but it
+really isn't- functions have only three key parts: argument, body, and return.
 
-# The way you create a function in R is very similar to how you would create a
-# variable. For this function, we are just multiplying a number by two
+The way you create a function in R is very similar to how you would create a
+variable. For this function, we are just multiplying a number by two:
+```{r}
 multiply_by_two <- function(argument) {
   x <- argument * 2
   return(x)
 }
 
 multiply_by_two(3)
+```
 
-# You can also make functions that take multiple inputs, or arguments (but you
-# don't have to name them "argument" like I did in the first example; you do
-# have to use the word "function" when creating a function though, and you
-# should also use "return" at the end of the function)
+You can also make functions that take multiple inputs, or arguments (but you
+don't have to name them "argument" like I did in the first example; you do
+have to use the word `function` when creating a function though, and you
+should also use `return` at the end of the function).
+```{r}
 multiply <- function(a, b) {
   return(a * b)
 }
 
 multiply(3, 4)
+```
 
-# But it is important to note that named arguments are only accessible within
-# the function where they appear
+But it is important to note that named arguments are only accessible within
+the function where they appear
+```{r, eval=FALSE}
 a
 b
+```
 
-# ...the same goes for variables that are initialized within functions
+...the same goes for variables that are initialized within functions
+```{r, eval=FALSE}
 my_function <- function(c) {
   d <- c ^ c
   return(d)
@@ -227,20 +287,24 @@ my_function <- function(c) {
 my_function(3)
 
 d
+```
 
-# This is due to a phenomenon called lexical scoping: variables will only be
-# available or changeable in the the context in which they are created (and all
-# contexts that are built from that context). This means that a variable that is
-# initialized outside of a function (in the "global" scope) will be available
-# in both the global and function scope; remember that we initialized z to -2
+This is due to a phenomenon called lexical scoping: variables will only be
+available or changeable in the the context in which they are created (and all
+contexts that are built from that context). This means that a variable that is
+initialized outside of a function (in the "global" scope) will be available
+in both the global and function scope; remember that we initialized z to -2
+```{r}
 my_other_function <- function(arg) {
   return(arg * z)
 }
 
 my_other_function(4)
+```
 
-# ...but if we change the value of a global variable in the function scope, this
-# will not carry back over to the more general global scope
+...but if we change the value of a global variable in the function scope, this
+will not carry back over to the more general global scope
+```{r}
 my_other_other_function <- function(f) {
   z <- f ^ 3
   return(z)
@@ -249,20 +313,22 @@ my_other_other_function <- function(f) {
 my_other_other_function(2)
 
 z
+```
 
-# One last thing about functions for today: you can save the return values of
-# functions as variables- this will make it so that you don't have to
-# recalculate functions each time you want to use the same output
+One last thing about functions for today: you can save the return values of
+functions as variables- this will make it so that you don't have to
+recalculate functions each time you want to use the same output
+```{r}
 h <- choose(20, 2)
 h
+```
 
-# There's a lot more that you can do with functions, and we'll come back to
-# functions throughout the course as we get deeper into R's capabilities!
+There's a lot more that you can do with functions, and we'll come back to
+functions throughout the course as we get deeper into R's capabilities!
 
-# It's best practice with R code to always end your script with an empty line
+* It's best practice with R code to always end your script with an empty line
 
-
-# Introduction {#intro}
+## Introduction {#intro}
 
 You can label chapter and section titles using `{#label}` after them, e.g., we can reference Chapter \@ref(intro). If you do not manually label them, there will be automatic labels anyway, e.g., Chapter \@ref(methods).
 
