@@ -304,11 +304,31 @@ easypack("RMySQL")
 #   running examples easier, but there are many ways around saving your password
 #   in with your R script.
 
-con <- dbConnect(MySQL(),
-                 user = 'rmaster',
-                 password = 'allthedata',
-                 host = 'bootcampr.cthkrjgll3mn.sa-east-1.rds.amazonaws.com',
-                 dbname='practicedb')
+db_host <- readline(prompt="Enter host address: ")
+db_name <- readline(prompt="Enter database name: ")
+db_user <- readline(prompt=paste("Enter username for ", 
+                                 db_name, 
+                                 ": "))
+
+# This next bit of code looks funky, but it serves a purpose: it gets a password
+# from user input, connects to the database specified by other inputs, and wipes
+# the password from memory in one continuous string of commands, so that we do
+# not forget to remove the password from our system's memory. This is a very
+# hacky way to do this, and if you ant to do this in your own code, consider
+# using the (mush more refined) R package getPass instead.
+db_pass <- readline(prompt=paste("Enter password for ", 
+                                 db_user, 
+                                 " in ", 
+                                 db_name, 
+                                 ": ")); con <- dbConnect(MySQL(),
+                                                          user = db_user,
+                                                          password = db_pass,
+                                                          host = db_host,
+                                                          dbname = db_name
+                                                         ); rm(db_pass)
+
+
+
 # To retrieve data from your database, use the function dbGetQuery() with the 
 # fist argument as the result of your dbConnect() function and the secons as a 
 # string of SQL script. The following will retrieve all data from the table
@@ -388,22 +408,27 @@ easypack("httr")
 #   into R, and if you're interested, check out the Rpubs link above for an 
 #   example of how to do this. For now, since this is a Twitter profile that I
 #   made just for this course, I'm not too worried about someone stealing my
-#   password...
-consKey <- "R04f9KGgNlSaAmb8BfGCHjNzc"
-consSecret <- "2K0ip3En5fMkHjI22YoyEFpwxKs6SUKaK4WGTzROb6VapMVk3A"
-token <- "995766050523373568-NxEI8NSWyLd7WR4IdPdiCZXbemk0BdG"
-tokenSecret <- 	"yXXHXlAJNwlpSaYhfxV99BrJolMxLs2Pnv2mw4KX561Zy"
-
-# We start by making an Oauth application with our consumer key and secret
-Oauthapp <- oauth_app("twitter", key=consKey, secret=consSecret)
+#   password, but we will still use the hacky solution from before to cover
+#   our tracks as much as possible by deleting passwords and objects storing
+#   them from our workspace.
+# We start by making an Oauth application with our consumer key and secret:
+cK <- readline(prompt="Enter your Twitter API consKey: ")
+cS <- readline(prompt="Enter your Twitter API consSecret: "); Oauthapp <- 
+          oauth_app("twitter", 
+                    key=cK, 
+                    secret=cS); rm(cK, cS)
 
 # Next, we "sign" the Oauth app with our token and token secret
-signedOauth <- sign_oauth1.0(Oauthapp, token=token, token_secret=tokenSecret)
+tk <- readline(prompt="Enter your Twitter API token: ")
+tkS <- readline(prompt="Enter your Twitter API tokenSecret: "); signedOauth <-
+           sign_oauth1.0(Oauthapp, 
+                         token=tk, 
+                         token_secret=tkS); rm(tk, tkS, Oauthapp)
 
 # And then we compose the REST command GET to retrieve our data from the Twitter
 # API using out signed Oauth application
 timeline <- GET("https://api.twitter.com/1.1/statuses/home_timeline.json", 
-                signedOauth)
+                signedOauth); rm(signedOauth)
 
 # And we use the httr function content to send this request to Twitter and get a
 # JSON file back
