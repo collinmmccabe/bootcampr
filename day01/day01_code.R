@@ -33,6 +33,8 @@ system('git merge master')
 # the cloud); NB: '-u' tells git to make an upstream branch
 system('git push -u origin student/<your-github-username>')
 
+#------------------------------------------------------------------------------#
+
 # The MOST IMPORTANT thing about writing code is to comment it with descriptions
 # of what each portion of code does, not only for your own sanity when
 # revisiting code, but also to allow others who may use your code to make sense
@@ -62,7 +64,7 @@ getwd()
 
 # I forgot- I put the welcome script within the folder "Welcome/", setwd() there
 #   Sidenote: in RStudio, as you're typing filenames, you can use tab-completion
-setwd("Welcome/")
+setwd("welcome/")
 
 # If you're not a fan of doing things through the command line/script (soon you
 # will be), there are GUI ways to do this, too: choose.dir

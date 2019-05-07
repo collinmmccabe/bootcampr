@@ -1,0 +1,22 @@
+---
+title: "day00_solutions"
+author: "Collin McCabe"
+date: "5/7/2019"
+output: html_document
+---
+# Exercise 1
+
+Install all the packages we'll need for the course:
+
+```{r, eval=FALSE}
+install.packages(c("tidyverse", "nycflights13", "maps", "PairedData", "olsrr",
+                   "caret", "class", "gdata", "xlsx", "Foreign", "RMySQL"))
+```
+
+# Exercise 2
+
+Watch the introduction to the Rstudio interface video:
+
+```{r,  eval=FALSE}
+browseURL("https://youtu.be/pXd54-vucu0?t=219 (Watch from 3:39 to 16:18)")
+```
