@@ -8,6 +8,33 @@
 #                                                                              #
 ################################################################################
 
+# A git refresher from last class:
+
+# After I've made changes to course material, you need to first check and see
+# what has changed on my master branch; you can do this with:
+system('git checkout master')
+system('git fetch origin')
+
+# Then, we can actually download these changes with:
+system('git pull')
+
+# But all of the changes that I will make will be going directly into the master
+# branch, which is kindaq off limits to all of you (for safety purposes).
+# To incorporate my changes, let's first make sure that you're in your branch:
+system('git checkout student/<your-github-username>')
+
+# And then we'll merge master into your current branch
+system('git merge master')
+
+# Et voila, you have the newest version of the course materials :)
+# ...once you email me your GitHub username, I will add you as a collaborator,
+# and then you'll be allowed to 'push' your own changes on your 'local' branch 
+# up to a 'remote' version of your branch on my repo (kinda like saving it to
+# the cloud); NB: '-u' tells git to make an upstream branch
+system('git push -u origin student/<your-github-username>')
+
+#------------------------------------------------------------------------------#
+
 # The MOST IMPORTANT thing about writing code is to comment it with descriptions
 # of what each portion of code does, not only for your own sanity when
 # revisiting code, but also to allow others who may use your code to make sense
@@ -37,7 +64,7 @@ getwd()
 
 # I forgot- I put the welcome script within the folder "Welcome/", setwd() there
 #   Sidenote: in RStudio, as you're typing filenames, you can use tab-completion
-setwd("Welcome/")
+setwd("welcome/")
 
 # If you're not a fan of doing things through the command line/script (soon you
 # will be), there are GUI ways to do this, too: choose.dir
