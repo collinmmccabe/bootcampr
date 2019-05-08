@@ -57,6 +57,7 @@ pwd()
 ?pwd
 
 # There's nothing exactly called pwd(), so let's use search-within help (??)
+# The following doesn't work in windows, use Help window to search
 ??wd
 
 # OK, it's actually called getwd(), so let's try that
@@ -64,7 +65,8 @@ getwd()
 
 # I forgot- I put the welcome script within the folder "Welcome/", setwd() there
 #   Sidenote: in RStudio, as you're typing filenames, you can use tab-completion
-setwd("welcome/")
+setwd("F:/Gitfolder/bootcampr/day01/welcome/")
+getwd()
 
 # If you're not a fan of doing things through the command line/script (soon you
 # will be), there are GUI ways to do this, too: choose.dir
@@ -212,7 +214,8 @@ class(l)
 # Character
 m <- "a"
 class(m)
-
+m <- dog
+class(m)
 #-----------#
 # Functions #
 #-----------#
