@@ -93,22 +93,43 @@ xor(TRUE, TRUE)
 # certain condition
 vec1[vec1 %% 2 == 0]
 vec1[TRUE]
+vec1[FALSE]
 
+vec01 <- c(3,27,9,15,12)
+vec02 <- c(1,3,5,7,9)
+vec03 <- c(14,49,56,63,28)
+
+(vec01 %% 3 == 0) & (vec02 !=2 ) & (vec03 %% 7 ==0 )
+(vec01 %% 3 == 0) | (vec02 !=2 ) | (vec03 %% 7 ==0 )
 # The same can be done with matrices, dataframes, lists, etc. But one neat thing
 # that you can do for subsetting dataframes is to subset one column based on the
 # conditions of another column
 mtcars
 mtcars$mpg[mtcars$cyl == 8]
-
+mtcars['Toyota Corona','mpg']
+mtcars['Toyota Corona',]
 # And you can even subset an entire dataframe from a conditional on its columns
 
 mtcars[mtcars$am > 0, ]
+subset(mtcars,am > 0)
 
+iris
+iris[iris$Species ==  'setosa',]
+iris[iris$Species ==  'setosa','Sepal.Length']
+subset(iris, Species == 'setosa')
+subset(iris, Species == 'setosa')$Sepal.Length
+iris$Species == 'setosa'
 # Using sum() in conjunction with conditionals is also a good way to implement a
 # conditional counting function in R, since TRUE == 1, summing the vector of
 # logicals is the same as counting all the TRUEs
 sum(vec1 %% 2 != 0)
+vec1 %% 2 != 0
+
 which(vec1 > 3)
+which(vec2 > 3)
+vec2
+vec2[which(vec2>3)]
+vec2[vec2>3]
 #---------------#
 # If Statements #
 #---------------#
@@ -124,6 +145,8 @@ x <- 2
 if (x %% 2 == 0) {
   print("x is even")
 }
+
+if (x %% 2 == 0) {print("x is even")}
 
 # You can also evaluate an if statement on a more complicated conditional
 #   Note: you should use double conditional operators for if statements, as they
@@ -152,8 +175,27 @@ if_statement <- function() {
   }
 }
 
-if_statement()
+ifelse_statement <- function() {
+  x <- as.numeric(readline("Type a number: "))
+  
+  if (x > 10) {
+    print("Your number is greater than ten")
+  }
+  else {
+    print("Your number is less or equal to ten")
+  }
+}
 
+if_statement()
+y <- if_statement()
+
+if (4<3) {print("Hello")}
+else{print("Goodbye")}
+
+if (4<3) {print("Hello")
+}else{print("Goodbye")}
+
+ifelse_statement()
 # Now let's add in directions for what R should do if the condition evaluates to
 # FALSE- this is done with an else statement: it should be on the same line as 
 # the closing curly brace of the if statement and will not have a condition of 
@@ -195,7 +237,7 @@ ifelseifelse_statement()
 # sure that your conditions are logically distinct or mutually exclusive...)
 
 ifelseifelse_long_statement <- function() {
-  x <- as.integer(readline("Type a number: "))
+  x <- as.numeric(readline("Type a number: "))
   
   if (x >= 10) {
     print("Your number is at least 10")
@@ -228,7 +270,9 @@ ifelseifelse_long_statement()
 # - Look up the help page to learn about how to structure the statement
 ?ifelse
 ifelse(y >= 6, "at least 6", "less than 6")
-
+y
+y = 4
+ifelse(y >= 6, "at least 6", "less than 6")
 #-------#
 # Loops #
 #-------#
@@ -252,6 +296,7 @@ i <- 1
 # it runs through the loop, then it will start again at the while line
 while (i < 10) {
   print("i is less than 10")
+  print(i)
   i <- i + 1
 }
 
@@ -273,6 +318,7 @@ while (i < 10) {
 #   Best Practice: empty lines between statements can help with reading long fxn
 i <- 1
 while (i < 10) {
+  print(i)
   print("i is less than 10")
   
   if (i > 5) {
@@ -291,6 +337,7 @@ while (i < 10) {
   
   if (i %% 2 == 1) {
     print("i is odd; specifically, it is:")
+    print(i)
     i <- i + 1
   } else if (i == 8) {
     print("i is equal to 8, so I'm quitting")
@@ -327,6 +374,19 @@ for (x in s) {
   print(x)
 }
 
+j <- -5
+while(j < 8){
+  if( j < 0 ){
+    print("j less than zero")
+    #print(j)
+  }
+  else if( j == 5){
+    print("j is 5!")
+    #print(j)
+  }
+  j <- j+1
+}
+
 # You can have R generate sequences using a variety of methods- here are a few:
 
 # The colon (:) is the simplest way to generate a sequence, it will produce a 
@@ -334,7 +394,7 @@ for (x in s) {
 # the number before the colon to the number after it
 50:1
 class(1:50)
-
+class(c(1,2,3))
 # seq() will generate a sequence of numerics (even if they look like integers)
 # from the from argument to the to argument, incremented by the by argument
 seq(from = 0, to = 50, by = 0.5)
@@ -354,6 +414,8 @@ for (i in iterable) {
   print(i)
 }
 i
+i <- 'apple'
+class(i)
 # You can also iterate over an object using indices instead of iterating over
 # the items automatically
 for (i in 1:length(iterable)) {
@@ -368,9 +430,16 @@ for (i in 1:length(iterable)) {
 for (x in matrix(c(1, 2, 3, 4, 5, 6, 7, 8, 9), nrow = 3, byrow = TRUE)) {
   print(x)
 }
-
+matrix(c(1, 2, 3, 4, 5, 6, 7, 8, 9), nrow = 3, byrow = TRUE)
 my_list <- list(c(1, 2, 3), c("A", "B", "C"), c(TRUE, FALSE, TRUE))
 for (item in my_list) {
+  print(item)
+}
+
+for (item in my_list) {
+  for (m in item){
+    print(m)
+    }
   print(item)
 }
 
@@ -379,7 +448,7 @@ for (item in my_list) {
 for (it in mtcars$mpg) {
   print(it)
 }
-
+it
 # Another way to iterate through dataframes is to use nested for loops for the 
 # row dimension and the column dimension (this sort of nested for looping can 
 # also be used to navigate matrices and complex lists). You can make this happen
@@ -433,3 +502,5 @@ every_other(1:20, by = 3)
 # A useful shorthand for the for loop structure is the function sapply()
 sapply(10:1, function(x) paste(x, "bottles of beer on the wall,", x, "bottles of beer. Take one down, pass it around,", x-1, "bottles of beer on the wall"))
 ?sapply
+song <- function(x) paste(x, "bottles of beer on the wall,", x, "bottles of beer. Take one down, pass it around,", x-1, "bottles of beer on the wall")
+sapply(5:1, song)
