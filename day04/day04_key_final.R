@@ -476,3 +476,48 @@ cbind(actor = cast[c(1:8, 10:12)], role = role)
 # a general web search (e.g. Google), or probably more helpful, search within
 # StackOverflow's R community (https://stackoverflow.com/questions/tagged/r) for
 # an answer to your question.
+lst <- c(3,5)
+lst[2]
+# Exercise from project euler.net 
+# Ex.1 sums of multiples of 3 and 5
+sums <- function(max_num,multiplelst){
+  sumtmp = 0
+     for(i in 1:max_num-1){
+       division = FALSE
+       for (multiple in multiplelst){
+         if(i %% multiple==0) {
+           division = TRUE 
+         }
+         }
+       if(division) {
+         sumtmp = sumtmp + i 
+         #print(i)
+       } 
+     }
+  sumtmp
+}
+sums(1000,c(3,5))
+
+# Ex.2 Even sums of fibonacci sequence
+fibonacci_evensums <- function(max_num, startlst){
+  sumtmp = 0
+  fiboseqtmp = startlst
+  for(i in fiboseqtmp){
+    if(i %% 2==0){
+      sumtmp = sumtmp + i
+    }
+  }
+  fiboseqnext = fiboseqtmp[1]+fiboseqtmp[2]
+  while (fiboseqnext < max_num){
+    if(fiboseqnext %% 2==0){
+      sumtmp = sumtmp + fiboseqnext
+    }
+    #print(fiboseqnext)
+    fiboseqtmp=c(fiboseqtmp[2],fiboseqnext)
+    fiboseqnext = fiboseqtmp[1]+fiboseqtmp[2]
+  }
+  sumtmp
+}
+fibonacci_evensums(4000000,c(1,2))
+
+# Ex.3 Largest prime factor
