@@ -757,3 +757,59 @@ largest_prod_in_series(number_1000digits,4)
 largest_prod_in_series(number_1000digits,13)
 
 # Ex.9
+# a + b + c = 1000
+# a^2 + b^2 = c ^2
+
+findsol <- function(num){
+  c_max <- as.integer(num*(sqrt(2)-1))+1
+  for (c in c_max:as.integer(num/2-1)){
+    absum <- num-c
+    abprod <- num^2/2-num*c
+    #print(absum)
+    #print(abprod)
+    #print(absum^2-4*abprod)
+    a <- absum/2 + sqrt(absum^2-4*abprod)/2
+    b <- absum/2 - sqrt(absum^2-4*abprod)/2
+    isInteger <- function(number){
+      tol <- 0.00001
+      isinteger <- FALSE
+      if(min(abs(c(number%%1, number%%1-1))) < tol){
+        isinteger <- TRUE
+      }
+      isinteger
+    }
+    if(isInteger(a)){
+      print("we found the solution:")
+      print(c(a,b,c,a*b*c))
+    }
+  }
+}
+findsol(12)
+findsol(1000)
+
+# Ex. 10 sum of prime numbers
+sumprime <- function(upperlimit){
+  num_prime <- 0
+  cur_num <- 2
+  prime_list <- list()
+  primesum <- 0
+  while(cur_num < upperlimit){
+    factlist_tmp <- largestprimefactor(cur_num)
+    if (length(factlist_tmp) == 1 & factlist_tmp[1] == cur_num){
+      num_prime <- num_prime + 1
+      prime_list <- c(prime_list,cur_num)
+      primesum <- primesum + cur_num
+      largest_prime <- cur_num
+    }
+    if(cur_num %% 2 !=0){
+      cur_num <- cur_num + 2
+    }else{
+      cur_num <- cur_num + 1
+    }
+  }
+  #prime_list
+  c(largest_prime,primesum)
+}
+sumprime(10)
+sumprime(1000000)
+sumprime(2000000)
