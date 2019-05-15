@@ -290,7 +290,7 @@ read_sas("data/gats_india.sas7bdat")
 #   does have functions that work well with remote databases. We will discuss
 #   these functions in our session on data manipulation.
 easypack("RMySQL")
-
+install("RMySQL")
 # The DBI function that you will use a lot when connecting to any database is
 # dbConnect(). The first argument will be a call to the function of the DBI 
 # backend, so in our case, MySQL(). The second argument will be the username 
@@ -321,7 +321,8 @@ db_pass <- readline(prompt=paste("Enter password for ",
                                  db_user, 
                                  " in ", 
                                  db_name, 
-                                 ": ")); con <- dbConnect(MySQL(),
+                                 ": ")); 
+con <- dbConnect(MySQL(),
                                                           user = db_user,
                                                           password = db_pass,
                                                           host = db_host,
@@ -521,3 +522,155 @@ fibonacci_evensums <- function(max_num, startlst){
 fibonacci_evensums(4000000,c(1,2))
 
 # Ex.3 Largest prime factor
+largestprimefactor <- function(num){
+  num_tmp = num
+  factorlist <- list()
+  for(i in 2: as.integer(sqrt(num)+1)){
+    if(num_tmp <= i & num_tmp != 1){
+      factorlist <- c(factorlist,num_tmp)
+      break
+    }
+    else if(num_tmp %% i ==0){
+      while(num_tmp %% i ==0){
+      num_tmp = num_tmp/i
+      }
+      factorlist <- c(factorlist,i)
+    }
+  }
+  if(length(factorlist)  == 0) {
+    factorlist <- c(factorlist,num_tmp)
+  }
+  #num_tmp
+  factorlist
+}
+largestprimefactor(13195)
+largestprimefactor(600851475143)
+largestprimefactor(6857)
+largestprimefactor(20)
+largestprimefactor(9)
+
+##############################
+# test code for Ex. 4
+test_lst <- as.numeric(strsplit(as.character(6857),"")[[1]])
+test_lst[1]
+test_lst[4-1+1]
+str(c(test_lst))
+str(c(test_lst)[1])
+isPalindrome <- function(lst){
+  len <- length(lst)
+  #print(len)
+  ispalindrome <-TRUE
+  for (ind in 1:(len%/%2)){
+    if (lst[ind] != lst[len-ind+1]){
+      ispalindrome <- FALSE
+      break
+    }
+  }
+  ispalindrome
+}
+isPalindrome(test_lst)
+# end of test code for Ex. 4
+##############################
+
+# Ex. 4 Largest palindrome product
+largestpalindromefromprod <- function(num1_max,num2_max){
+  findnum <- 0
+  prod_tmp_largest <- 11
+  i_lst <- list()
+  j_lst <- list()
+  prod_tmplst <- list()
+  for(i in rev(max(c(60,num1_max%/%10)):num1_max)){
+    for(j in rev(i:num2_max)){
+      prod_tmp <- i*j
+      # check the product to be palindrome or not
+      prod_tmp_digits <- as.numeric(strsplit(as.character(prod_tmp),"")[[1]])
+      isPalindrome <- function(lst){
+        len <- length(lst)
+        ispalindrome <-TRUE
+        for (ind in 1:(len%/%2)){
+          if (lst[ind] != lst[len-ind+1]){
+            ispalindrome <- FALSE
+            break
+          }
+        }
+        ispalindrome
+      }
+      if(isPalindrome(prod_tmp_digits)){
+        i_lst <- c(i_lst,i)
+        j_lst <- c(j_lst,j)
+        #print(c(i,j))
+        #print("Find the largest palindrome from a product of two numbers: ")
+        #print(prod_tmp)
+        if(prod_tmp > prod_tmp_largest){
+          prod_tmp_largest <- prod_tmp
+          largest_pair <- c(i,j,prod_tmp)
+        }
+        prod_tmplst <- c(prod_tmplst,prod_tmp)
+        findnum <- findnum + 1
+        #break
+      }
+      
+    }
+  }
+  #prod_tmplst
+  largest_pair
+}
+
+res <- largestpalindromefromprod(999,999)
+res
+largestpalindromefromprod(999,999)
+largestpalindromefromprod(99,99)
+!FALSE
+# Ex. 5 Smallest multiple
+powercontain <- function(bignumber,smallnumber){
+  if (smallnumber > as.integer(sqrt(bignumber))+1){
+    num_power <- 1 
+  }
+  else {
+    num_power <- 1
+    powers_tmp <- smallnumber
+    while(powers_tmp < bignumber){
+      num_power <- num_power + 1
+      powers_tmp <- powers_tmp * smallnumber
+    }
+    num_power <- num_power -1
+  }
+  num_power
+}
+powercontain(20,5)
+smallest_multiple <- function(start,end){
+  factorlist <- list()
+  prod <- 1
+  for ( i in start:end){
+    primefact_tmp = largestprimefactor(i)
+    print(i)
+    print(primefact_tmp)
+    for (value in primefact_tmp){
+      if(!(value %in% factorlist)){
+        prod <- prod*value^powercontain(end,value)
+        factorlist <- c(factorlist,value)
+      }
+    }
+  } 
+  prod
+}
+smallest_multiple(2,20)
+
+# Ex. 6 sum square difference
+sumsqdiff <- function(start,end){
+  sumsq <- 0
+  sqsum <- 0
+  for (i in start:end){
+    sumsq <- sumsq + i
+    sqsum <- sqsum + i^2
+  }
+  sumsq <- sumsq ^2
+  sumsq - sqsum
+}
+sumsqdiff(1,10)
+sumsqdiff(1,100)
+
+# Ex 7. 10001st prime
+nthprime <- function(nth){
+  
+}

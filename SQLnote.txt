@@ -1,0 +1,102 @@
+
+relational database query language SQL:
+
+Host address: 127.0.0.1
+username:
+passward:
+db_name
+
+# create a new database
+CREAT DATABASE db_name;
+USE db_name;
+
+# create a new table
+
+CREAT TABLE my_first_table (column_1, column_2);
+row is called xxx
+column is called fields ??
+
+# you can tell the data type of each column
+CREAT TABLE my_first_table_2 (
+column_1 SMALLINT, # small length of integer
+column_2 TINYINT)  # single bit, 0 or 1
+
+# data type schema
+date
+char(1) # one character allowed, U or 
+varchar(127)
+longtext # much longer than varchar
+text 
+float
+smallint
+tinyint # typically boolean int
+
+# assign special property to a  column 
+# seemingly "AUTO_INCREMENT" not compatible with "UNIQUE" or "NOT NULL"
+# no need to assign length to SMALLINT
+CREAT TABLE my_first_table_3 (
+key SMALLINT AUTO_INCREMENT, # unique and also auto-increment
+answer_correct TINYINT NOT NULL DEFAULT 1)  # single bit boolean value, not null
+
+# insert entry to an existing table
+INSERT INTO my_first_table_3; # not correct
+INSERT INTO my_first_table_3 (answer_correct) VALUES(0);
+
+# update entry
+UPDATE my_first_table_3 SET answer_correct=1 WHERE key = 1;
+
+# select
+SELECT * FROM my_first_table_3;
+SELECT * FROM Customers;
+SELECT CustomerName, Address FROM Customers;
+SELECT Country FROM Customer;
+
+# DISTINCT key word
+SELECT DISTINCT Country FROM Customers;
+SELECT DISTINCT City FROM Customers WHERE Country = 'Germany';
+
+# ORDER BY key word, Default = ASC
+SELECT DISTINCT City FROM Customers WHERE Country = 'Germany' ORDER BY City;
+SELECT DISTINCT City FROM Customers WHERE Country = 'Germany' ORDER BY City DESC;
+SELECT * FROM OrderDetails WHERE Quantity > 10;
+SELECT * FROM OrderDetails WHERE Quantity > 10 ORDER BY Quantity;
+SELECT * FROM OrderDetails WHERE Quantity BETWEEN 10 AND 20 ORDER BY Quantity;
+# BETWEEN num1 AND num2 is inclusive, 
+SELECT * FROM OrderDetails WHERE Quantity >= 10 ORDER BY Quantity;
+SELECT * FROM OrderDetails WHERE Quantity = 10 ORDER BY Quantity;
+# not equal: <>
+SELECT * FROM OrderDetails WHERE Quantity <> 10 ORDER BY Quantity;
+# IN a range key word
+SELECT * FROM OrderDetails WHERE Quantity IN (1,2,10,12) ORDER BY Quantity;
+SELECT * FROM OrderDetails WHERE Quantity NOT IN (10,11) ORDER BY Quantity;
+# OR key word
+SELECT * FROM OrderDetails WHERE Quantity <10 OR Quantity > 20 ORDER BY Quantity;
+SELECT * FROM OrderDetails WHERE Quantity NOT BETWEEN 10 AND 20 ORDER BY Quantity;
+# can have multiple fields to order with
+SELECT * FROM OrderDetails WHERE Quantity NOT BETWEEN 10 AND 20 ORDER BY OrderDetailID, OrderID;
+# OrderID has 8 in it regardless of order
+SELECT * FROM OrderDetails WHERE OrderID LIKE '%8%';
+# Deal with date data: select Orders that happen later than 1996-12-31
+SELECT * FROM Orders WHERE OrderDate > '1996-12-31';
+SELECT * FROM my_first_table_3 WHERE key IS NULL;
+SELECT * FROM Orders ORDER BY ShipperID;
+# perform some calculations: COUNT
+SELECT COUNT(DISTINCT ShipperID) FROM Orders;
+# AS: alias
+SELECT COUNT(DISTINCT ShipperID) AS 'Number of Shippers' FROM Orders;
+SELECT SUM(DISTINCT ShipperID) AS 'Sum of Shippers' FROM Orders;
+SELECT AVG(DISTINCT ShipperID) AS 'Mean Shippers' FROM Orders;
+SELECT MIN(DISTINCT ShipperID) AS 'Min Shippers ID' FROM Orders;
+SELECT MAX(DISTINCT ShipperID) AS 'Min Shippers ID' FROM Orders;
+# GROUP BY
+SELECT COUNT(OrderID) AS 'Number of Orders' FROM Orders GROUP BY ShipperID;
+SELECT COUNT(OrderID) AS 'Number of Orders', ShipperID FROM Orders GROUP BY ShipperID;
+# JOIN 
+SELECT * FROM Orders
+LEFT JOIN Customers
+ON Orders.CustomerID = Customers.CustomerID;
+SELECT * FROM (SELECT *
+FROM Orders
+LEFT JOIN Customers
+ON Orders.CustomerID = Customers.CustomerID) AS CustomerOrders LEFT JOIN Employees ON
+CustomerOrders.EmployeeID = Employees.EmployeeID;
