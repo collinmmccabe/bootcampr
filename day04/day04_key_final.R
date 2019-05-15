@@ -2,7 +2,7 @@
 #                                                                              #
 #                      Erdos Institute Code Bootcamp for R                     #
 #                                 ------------                                 #
-#          Day 4 - Importing Data from Files, Databases, and the Web           #
+#                Day 4 - Importing Data from Files, and the Web                #
 #                                 ------------                                 #
 #                 Collin McCabe | collinmichaelmccabe@gmail.com                #
 #                                                                              #
@@ -59,29 +59,29 @@ easypack <- function(package) {
 # already loaded from when we called library() on the entire tidyverse. Doing 
 # this (importing just a single package) can save time and space if you know 
 # you'll just need a specific function.
-easypack("readr")
+library("readr")
 
 # The simplest way to read a flat file into R is to just read the whole file 
 # into one long string. Sometimes this is a great idea- for instance, maybe you
 # want to import a long text file for natural language processing or genomics.  
 # In base R, you do this with readChar()
-readChar("day4/data/prideandprejudice.txt") # readChar() requires you to state length
-readChar("day4/data/prideandprejudice.txt", nchars = 1e4) # ...so you have to guess
-readChar("day4/data/prideandprejudice.txt", nchars = 1e5) # ...over and over
-readChar("day4/data/prideandprejudice.txt", nchars = 1e6) # ...until you guess right
+readChar("data/prideandprejudice.txt") # readChar() requires you to state length
+readChar("data/prideandprejudice.txt", nchars = 1e4) # ...so you have to guess
+readChar("data/prideandprejudice.txt", nchars = 1e5) # ...over and over
+readChar("data/prideandprejudice.txt", nchars = 1e6) # ...until you guess right
 
 # Another way to get the length of the text file programmatically is to 
 # calculate the filesize from file.info()
-fileName <- "day4/data/prideandprejudice.txt"
+fileName <- "data/prideandprejudice.txt"
 readChar(fileName, file.info(fileName)$size)
 
 # But you'll be happy to know that in the tidyverse, this is all done quite 
 # easily with the function read_file()
-read_file("day4/data/prideandprejudice.txt")
+read_file("data/prideandprejudice.txt")
 
 # But what if we want to read in the text file one line at a time? For this, 
 # using base R, we can use readLines
-readLines("day4/data/prideandprejudice.txt")
+readLines("data/prideandprejudice.txt")
 
 # That went a lot smoother than readChar() did, but one glaring issue is the
 # fact that readLines() has trouble making sense of some more exotic characters
@@ -90,7 +90,7 @@ readLines("day4/data/prideandprejudice.txt")
 #   Sidenote: remember that just running the read function will not import any
 #   data permanently into R as an object. To do this, you must assign the return
 #   of your read function to an object.
-(pride <- read_lines("day4/data/prideandprejudice.txt"))
+(pride <- read_lines("data/prideandprejudice.txt"))
 
 # We can also use some simple conditional subsetting to remove all the empty 
 # lines in the file that was read in.
@@ -102,27 +102,27 @@ pride[pride != ""]
 # types of delimitted files in the data world are tab-delimitted and comma-
 # delimitted files. Let's start with tab-delimitted (data fields separated by a
 # \t or tab) files. Using base R, you import these files with read.table()
-read.table("day4/data/usbls_edhcemployment_short.txt")
+read.table("data/usbls_edhcemployment_short.txt")
 
 # For these larger files,you might not want to see all the data every time you 
 # call the data object. For this, we can use the same head() function that we 
 # used before for vectors and use it for data frames
-head(read.table("day4/data/usbls_edhcemployment_short.txt"))
+head(read.table("data/usbls_edhcemployment_short.txt"))
 
 # It looks like our column names didn't get read in correctly. We can fix 
 # that with the argument header = TRUE
-head(read.table("day4/data/usbls_edhcemployment_short.txt", header = TRUE))
+head(read.table("data/usbls_edhcemployment_short.txt", header = TRUE))
 
 # read.table() works well if you're working with well formatted datasets, but 
 # often, either due to formatting issues from upgrading legacy file systems,
 # computer error, or just plain laziness, you don't get a clean dataset. Watch 
 # what happens when we try to get read.table() to import a file where some rows 
 # don't contain the expected number of entries...
-head(read.table("day4/data/usbls_edhcemployment.txt", header = TRUE))
+head(read.table("data/usbls_edhcemployment.txt", header = TRUE))
 
 # Of course, the tidyverse handles tab-delimitted files with ease, using 
 # read_tsv() for tab separated values
-read_tsv("day4/data/usbls_edhcemployment.txt")
+read_tsv("data/usbls_edhcemployment.txt")
 
 # Note that we did get a warning because of our number of rows not matching up
 # with our number of entries in each row, but instead of throwing an error,
@@ -133,43 +133,43 @@ read_tsv("day4/data/usbls_edhcemployment.txt")
 
 # We can also read in comma-separated value files, or csv's, using the base R
 # function read.csv()
-head(read.csv("day4/data/car.csv"))
+head(read.csv("data/car.csv"))
 
 # Well shoot, the last base R function, read.table() didn't import our headers
 # by default when they were there, but now we're having the opposite issue with
 # read.csv(). By default, read.csv() expects column names, and so we need to
 # explicitly state that we don't have any column names in this file, and that
 # our first line contains data
-head(read.csv("day4/data/car.csv", header = FALSE))
+head(read.csv("data/car.csv", header = FALSE))
 
 # Unfortunately, the tidyverse version of this function has this issue, too. So
 # it's typically a good idea to always explicitly tell your import function 
 # whether or not there are header titles in the file. With the tidyverse import
 # functions (all of them), this is done with the argument col_names instead of
 # header.
-read_csv("day4/data/car.csv")
-read_csv("day4/data/car.csv", col_names = FALSE)
+read_csv("data/car.csv")
+read_csv("data/car.csv", col_names = FALSE)
 
 # But one nice thing about this col_names argument is that it can also take a
 # vector of names, which will rename the columns in the dataset. There is a text
 # file in the data folder that contains the names of the columns:
-read_lines("day4/data/car-names.txt")
+read_lines("data/car-names.txt")
 
-read_csv("day4/data/car.csv", col_names = c("buying", "maint", "doors", "persons", 
+read_csv("data/car.csv", col_names = c("buying", "maint", "doors", "persons", 
                                        "lug_boot", "safety"))
 
 # If you try to do this with the base R function, it doesn't work, which is 
 # another added bonus of using the tidyverse function in this case.
-head(read.csv("day4/data/car.csv", header = c("buying", "maint", "doors", "persons", 
+head(read.csv("data/car.csv", header = c("buying", "maint", "doors", "persons", 
                                          "lug_boot", "safety")))
 
 # On the off chance that you have a flat file that is not using either commas or
 # tabs for delimitting, you can use the read.delim() function in base R or the 
 # read_delim() in the tidyverse. In base R, delimitters are defined using the 
 # argument sep, and in the tidyverse, you use delim.
-read.delim("day4/data/days.txt", sep = " ")
+read.delim("data/days.txt", sep = " ")
 
-(days <- read_delim("day4/data/days.txt", delim = " "))
+(days <- read_delim("data/days.txt", delim = " "))
 
 # By now, you may have noticed that the functions from the tidyverse are using
 # slightly different displays for the data than a typical dataframe. This is 
@@ -208,11 +208,11 @@ easypack("gdata")
 
 # The function for reading in Excel data is of the same formula as for base R 
 # read functions (read.*()). For Excel files, this equates to read.xls()
-read.xls("day4/data/fbicrime.xls")
+read.xls("data/fbicrime.xls")
 
 # However, since development of this package has died down recently, the more 
 # up-to-date .xlsx format is not supported by gdata
-read.xls("day4/data/crimebyyear_multisheet.xlsx")
+read.xls("data/crimebyyear_multisheet.xlsx")
 
 # Another noteworthy package that you can use to import Excel files is the more
 # recent xlsx. This package uses Java instead of Perl, and R should be able to
@@ -228,20 +228,20 @@ read.xlsx("data/crimebyyear_multisheet.xlsx", 1)
 # readxl. This package does not load automatically with the rest of the 
 # tidyverse packages since it isn't used quite as often- this means you'll have
 # to load it separately.
-easypack("readxl")
+library("readxl")
 
 # The core function used for importing both .xls and .xlsx files is read_excel()
-read_excel("day4/data/fbicrime.xls")
+read_excel("data/fbicrime.xls")
 
 # It looks like there was some data in the first few lines of the Excel file
 # before we could get to the real data table. We can have readxl ignore these
 # lines with the skip argument.
-read_excel("day4/data/fbicrime.xls", skip = 3)
+read_excel("data/fbicrime.xls", skip = 3)
 
 # If working with a multi-sheet Excel document, you can also choose the sheet
 # number to import with the sheet argument.
-read_excel("day4/data/crimebyyear_multisheet.xlsx", skip = 3)
-read_excel("day4/data/crimebyyear_multisheet.xlsx", skip = 3, sheet = 2)
+read_excel("data/crimebyyear_multisheet.xlsx", skip = 3)
+read_excel("data/crimebyyear_multisheet.xlsx", skip = 3, sheet = 2)
 
 # Of course, Excel isn't the only proprietary data file system out there- there
 # are a ton! As a data scientist, one of the more common issues that you're 
@@ -264,89 +264,6 @@ library(haven)
 # The haven function for importing SAS files is, aptly named, read_sas()
 read_sas("data/gats_india.sas7bdat")
 
-#-----------#
-# Databases #
-#-----------#
-
-# Databases can be some of the most powerful ways to large amounts of data while
-# still making them easily accessible and subsettable, or queryable. Querying a 
-# database is typically as simple as writing a single line of script defining
-# what data you want and where to get it from; this is done through the use of
-# structured query language, or SQL. Although queries can be quite simple, they 
-# can easily get much more complicated if you have data stored in different 
-# tables. This is often the case with relational databases, where you store data
-# in a variety of related tables so as to reduce the reundancy of data that may 
-# be found in many entries. The specific flavor of relational database that 
-# we'll be talking about today is MySQL, but there are many different types of 
-# relational databases (which use mostly the same structured query languge).
-
-# The main package that R uses for interfacing with databases both over the
-# internet and over internal networks is DBI, short for database interface. 
-# However, by loading the specific RMySQL DBI backend, DBI will also be loaded
-# for use in our R session. Most of the work that RMySQL does will be behind the
-# scenes, with the DBI functions doing the majority of the heavy lifting.
-#   Note, DBI and RMySQL are not part of the tidyverse, although the tidyverse
-#   does have functions that work well with remote databases. We will discuss
-#   these functions in our session on data manipulation.
-easypack("RMySQL")
-
-# The DBI function that you will use a lot when connecting to any database is
-# dbConnect(). The first argument will be a call to the function of the DBI 
-# backend, so in our case, MySQL(). The second argument will be the username 
-# used to access the database, and third will be this user's password. Next will
-# be the internet location where the database is hosted; in our case, I've put
-# a database up in the Amazon Web Services cloud for us to use for the course.
-# Last, but not least is the name of the specific database you'd like to connect
-# to; this is because hosts may host more than one database. Finally, make sure 
-# to save the output of this function as an object so that you don't have to
-# type out all of this every time you're running a DBI function.
-#   Best practice: don't save your passwords in R script. I'm doing this to make
-#   running examples easier, but there are many ways around saving your password
-#   in with your R script.
-
-db_host <- readline(prompt="Enter host address: ")
-db_name <- readline(prompt="Enter database name: ")
-db_user <- readline(prompt=paste("Enter username for ", 
-                                 db_name, 
-                                 ": "))
-
-# This next bit of code looks funky, but it serves a purpose: it gets a password
-# from user input, connects to the database specified by other inputs, and wipes
-# the password from memory in one continuous string of commands, so that we do
-# not forget to remove the password from our system's memory. This is a very
-# hacky way to do this, and if you ant to do this in your own code, consider
-# using the (mush more refined) R package getPass instead.
-db_pass <- readline(prompt=paste("Enter password for ", 
-                                 db_user, 
-                                 " in ", 
-                                 db_name, 
-                                 ": ")); con <- dbConnect(MySQL(),
-                                                          user = db_user,
-                                                          password = db_pass,
-                                                          host = db_host,
-                                                          dbname = db_name
-                                                         ); rm(db_pass)
-
-
-
-# To retrieve data from your database, use the function dbGetQuery() with the 
-# fist argument as the result of your dbConnect() function and the secons as a 
-# string of SQL script. The following will retrieve all data from the table
-# mtcars; the * is SQL wildcard for "everything".
-dbGetQuery(con, "SELECT * FROM mtcars")
-
-# If you want to just retrieve specific columns from the table, put these in
-# after the SELECT statement, separated by commas.
-dbGetQuery(con, "SELECT mpg, cyl FROM mtcars")
-
-# And finally, you can also use DBI to upload data to the database using
-# functions starting with dbWrite...
-dbWriteTable(conn = con, name = 'mtcars', value = mtcars)
-
-# There is a lot more that you can do with SQL, especially when it comes to 
-# joining related tables, but this all requires more knowledge of SQL. Since
-# this is an R course, not a SQL one, we'll keep the discussion fairly basic.
-
 #-------------------#
 # Data from the Web #
 #-------------------#
@@ -361,7 +278,7 @@ dbWriteTable(conn = con, name = 'mtcars', value = mtcars)
 # and versatile is called jsonlite. Although this package isn't officially part
 # of the tidyverse, it is referred to as "tidyverse-adjacent" because many of 
 # its functions and formats play nicely with the tidyverse.
-easypack("jsonlite")
+library("jsonlite")
 
 # Some web APIs are completely free and publicly accessible. My favorite among 
 # these is the GitHub API, which posts JSON versions of all publicly accessible
@@ -374,7 +291,7 @@ easypack("jsonlite")
 # an API to fetch and return data for. I used the GitHub API here specifially
 # because it doesn't do this, so it should be a little less confusing.
 (bootcampR_commits <- 
-    fromJSON("https://api.github.com/repos/collinmmccabe/bootcampR/commits"))
+    fromJSON("https://api.github.com/repos/collinmmccabe/bootcampr/commits"))
 
 # We can inspect the structure of the converted JSON object with str()
 str(bootcampR_commits)
@@ -445,7 +362,7 @@ json1 <- content(timeline)
 # and convert to R objects. The tidyverse has a great package for doing just 
 # this- it's called rvest, a play on words for the fact that it haRVESTs html 
 # web data
-easypack("rvest")
+library("rvest")
 
 # One of the most popular sites to use for web scraping examples is IMDB, due to
 # the fact that it is regularly formatted and has much of its data in table-ish
@@ -459,8 +376,8 @@ hercules <- read_html("https://www.imdb.com/title/tt1267297/")
 # and general tag span with html_nodes(), then we will translate to an R data
 # object with html_text().
 # SelectorGadget
-nodes <- html_nodes(hercules, "#titleCast .itemprop span")
-cast <- html_text(nodes)
+nodes <- html_nodes(hercules, "#titleCast .primary_photo a img")
+cast <- html_attr(nodes, "title")
 
 # We'll do the same with roles, too.
 nodes2 <-  html_nodes(hercules, "#titleCast .character a")

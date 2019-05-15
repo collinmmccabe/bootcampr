@@ -16,13 +16,13 @@ library("tibble")
 # Before we get really into the package functionality today, 
 
 # CRAN page for a package
-url("https://cran.r-project.org/web/packages/tibble/")
+browseURL("https://cran.r-project.org/web/packages/tibble/")
 
 # User manual for the package
-url("https://cran.r-project.org/web/packages/tibble/tibble.pdf")
+browseURL("https://cran.r-project.org/web/packages/tibble/tibble.pdf")
 
 # Vignettes are great for seeing a package "in action"
-url("https://cran.r-project.org/web/packages/tibble/vignettes/tibble.html")
+browseURL("https://cran.r-project.org/web/packages/tibble/vignettes/tibble.html")
 
 # Make a tibble using vertices and names
 A <- c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
@@ -55,10 +55,10 @@ library("tidyr")
 
 # If you want to learn more about a package, the best place to start is with
 # vignettes on the CRAN site
-url("https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html")
+browseURL("https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html")
 
 # But instead, let's actually use Hadley Wickham's online book to learn tidyr :)
-url("http://r4ds.had.co.nz/tidy-data.html")
+browseURL("http://r4ds.had.co.nz/tidy-data.html")
 
 ?table4a
 test1 <- as_tibble(cbind(table4a, test = c(1, 2, 3)))
