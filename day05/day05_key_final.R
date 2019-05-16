@@ -31,7 +31,7 @@ C <- c("M", "F", "M", "M", "O", "F", "F", "M", "M", "O")
 tibble(number = A, bool = B, sex = C)
 
 # Tibbles will not be created if any column is shorter than another
-D <- c("x", "y", "z", "a", "b")
+D <- c("x")
 tibble(number = A, bool = B, sex = C, letters = D)
 
 # Factors are really just strings with a defined set of possible values
@@ -62,6 +62,7 @@ browseURL("http://r4ds.had.co.nz/tidy-data.html")
 
 ?table4a
 test1 <- as_tibble(cbind(table4a, test = c(1, 2, 3)))
+test1
 gather(table4a, 2:3, key = "year", value = "cases")
 
 gather(test1, 2:3, key = "year", value = "cases")
@@ -79,6 +80,7 @@ table5
 table5a <- unite(table5, new, 2:3, sep = "")
 table5a$new <- as.integer(table5a$new)
 
+table5a
 ### LEARNING FROM TEH INTERWEBZ TODAY ###
 
 
@@ -98,7 +100,7 @@ View(who)
 
 who1 <- gather(who, key = "code", value = "value", 5:60)
 
-
+view(who1)
 
 who1 <- separate(who1, code, c("new", "var", "sexage"))
 
