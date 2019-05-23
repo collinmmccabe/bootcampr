@@ -20,7 +20,7 @@
 # between these approaches is whether or not you tell the machine learning what
 # the "right" answers are in your training set- i.e. if you are making a 
 # regression model, what are the y-values; if you're making a classification
-# model, what are the categories into which things fall?Since supervised 
+# model, what are the categories into which things fall? Since supervised 
 # learning is by definition the more structured of the two approaches, it seemed
 # like the obvious place to start when teaching machine learning.
 
@@ -63,17 +63,76 @@ glimpse(mpg)
 # regression model to test; we'll use the '-' notation to remove model from
 # our dataset, since this is so variable that it may not be helpful
 mpgmod1 <- lm(hwy ~ . - model, data = mpg)
+mpgmod2 <- lm(hwy ~ cty, data = mpg)
 
 # You can then make predictions for each observation's hwy value from the model
 # - this will be just the point on the line of best fit for each row of values
 predictions <- predict(mpgmod1)
+predictions2 <- predict(mpgmod2)
+
 
 # To calculate how far off our model was from the real values, we just subtract
 error <- predictions - mpg$hwy
+error2 <- predictions2 - mpg$hwy
 
 # Root Mean Squared Error (RMSE) is the standard for assessing regression model
 # performance for predictions.
 sqrt(mean(error ^ 2))
+RMSE_pred <- sqrt(mean(error2 ^ 2))
+
+# We can compare RMSE to a topic that we kinda glazed over yesterday, R^2; 
+# Here's that section, just for refreshers:
+
+###############
+# DAY09 - R^2 #
+###############
+
+X <- mpg$cty
+Y <- mpg$hwy
+n <- length(Y)
+a = lm(Y ~ X)$coefficients[1]
+b = lm(Y ~ X)$coefficients[2]
+
+# R^2 is a measure that tells us what % of the behavior of Y is explained by X
+
+# Ybar   = average of Yi
+# Yhat_i = predicted Y val
+
+# TSS = sum (Yi - Ybar)^2      # Total sum of squares
+# RSS = sum (Yi - Yhat_i)^2    # Residual sum of squares
+# ESS = sum (Yhat_i - Ybar)^2  # Expected sum of squares
+
+# TSS = ESS + RSS
+# R^2 = ESS / TSS
+
+# calculating R^2
+Y_hat <- b * X + a              # model prediction for Y
+Y_bar <- mean(Y)                # overall mean of Y across all points
+TSS <- sum((Y - Y_bar) ^ 2)     # diff between mean(Y) and Y
+RSS <- sum((Y - Y_hat) ^ 2)     # diff between Y and prediction
+ESS <- sum((Y_hat - Y_bar) ^ 2) # diff between prediction and mean(Y)
+
+R_sq = ESS / TSS
+# --- OR ---
+R_sq_v2 = 1 - (RSS / TSS)
+(R_sq - summary(mpgmod2)$r.squared)
+
+# But this won't work- why?
+R_sq == summary(mpgmod2)$r.squared # Probably because there are computational 
+                                   # shortcuts programmed into R to estimate R^2
+                                   # rather than having to calculate for large n
+
+# You can also check if answers are approximately equal with the tidyverse...
+near(R_sq, summary(mpgmod2)$r.squared)
+
+###############
+
+# For reference, RMSE is just the square-root of RSS divided by the sample-size:
+#   sqrt(RSS/n)
+
+RMSE_byhand = sqrt(RSS/n)
+
+near(RMSE_pred, RMSE_byhand)
 
 # But this was a pretty useless model, since we just predicted the same values 
 # for hwy that were used in our model. We have no idea how our model might
