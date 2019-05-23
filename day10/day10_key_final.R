@@ -63,17 +63,22 @@ glimpse(mpg)
 # regression model to test; we'll use the '-' notation to remove model from
 # our dataset, since this is so variable that it may not be helpful
 mpgmod1 <- lm(hwy ~ . - model, data = mpg)
+mpgmod2 <- lm(hwy ~ cty, data = mpg)
 
 # You can then make predictions for each observation's hwy value from the model
 # - this will be just the point on the line of best fit for each row of values
-predictions <- predict(mpgmod1)
+predictions1 <- predict(mpgmod1)
+predictions2 <- predict(mpgmod2)
 
 # To calculate how far off our model was from the real values, we just subtract
-error <- predictions - mpg$hwy
+error1 <- predictions1 - mpg$hwy
+error2 <- predictions2 - mpg$hwy
 
 # Root Mean Squared Error (RMSE) is the standard for assessing regression model
 # performance for predictions.
-sqrt(mean(error ^ 2))
+sqrt(mean(error1 ^ 2))
+rmse_pred <- sqrt(mean(error2^2))
+#sqrt(mean(error2 ^ 2))
 
 # But this was a pretty useless model, since we just predicted the same values 
 # for hwy that were used in our model. We have no idea how our model might
